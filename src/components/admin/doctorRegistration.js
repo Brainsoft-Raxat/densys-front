@@ -4,7 +4,7 @@ function DoctorRegistration() {
 
     const [dateOfBirth, setDateOfBirth] = useState("");
     const [iinNumber, setIIN] = useState("");
-    const [idNumber, setID] = useState("");
+   // const [idNumber, setID] = useState("");
     const [firstName, setFirstName] = useState("");
     const [middleName, setMiddleName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -32,9 +32,9 @@ function DoctorRegistration() {
             setIIN(value);
         }
 
-        if (id === "idNumber") {
+       /* if (id === "idNumber") {
             setID(value);
-        }
+        }*/
 
         if (id === "firstName") {
             setFirstName(value);
@@ -101,7 +101,7 @@ function DoctorRegistration() {
 
     const[doctors, setDoctors] = useState([{
         dateOfBirth: '2000-06-12', iinNumber: '000612400567',
-        idNumber: '050750097', firstName: 'Ardak', middleName: 'Bolatkyzy',
+        firstName: 'Ardak', middleName: 'Bolatkyzy',
         lastName: 'Azamat', contactNumber: '+77479866889', departmentID: 'DEPT123',
         specDetID: 'SPEC675', expYears: '20', photoOfDoctor: '', docCategory: 'Highest',
         appPrice: '10000', schedule: 'MONWEDFRI', education: 'NUSOM', 
@@ -118,23 +118,23 @@ function DoctorRegistration() {
         localStorage.setItem('doctors', JSON.stringify(doctors))
     })
 
-    const addDoctor = (dateOfBirth, iinNumber, idNumber, firstName, middleName, 
+    const addDoctor = (dateOfBirth, iinNumber, firstName, middleName, 
         lastName, contactNumber, departmentID, specDetID, expYears,
         photoOfDoctor, docCategory, appPrice, schedule, education,
         ratingDoc, addressDoc, homepageURL) => {
-            setDoctors([...doctors, {dateOfBirth, iinNumber, idNumber, firstName, middleName, 
+            setDoctors([...doctors, {dateOfBirth, iinNumber, firstName, middleName, 
             lastName, contactNumber, departmentID, specDetID, expYears,
             photoOfDoctor, docCategory, appPrice, schedule, education,
             ratingDoc, addressDoc, homepageURL}])
     }
 
     const handleSubmit = (e) => {
-        console.log(dateOfBirth, iinNumber, idNumber, firstName, middleName, 
+        console.log(dateOfBirth, iinNumber, firstName, middleName, 
             lastName, contactNumber, departmentID, specDetID, expYears,
             photoOfDoctor, docCategory, appPrice, schedule, education,
             ratingDoc, addressDoc, homepageURL);
 
-        addDoctor(dateOfBirth, iinNumber, idNumber, firstName, middleName, 
+        addDoctor(dateOfBirth, iinNumber, firstName, middleName, 
             lastName, contactNumber, departmentID, specDetID, expYears,
             photoOfDoctor, docCategory, appPrice, schedule, education,
             ratingDoc, addressDoc, homepageURL)
@@ -157,14 +157,6 @@ function DoctorRegistration() {
                     <input className="form__input" type="text" pattern = "[0-9]*" value = {iinNumber} 
                         onChange = {(e) => handleInputChange(e)} 
                         id="iinNumber" placeholder="IIN Number"
-                    />
-                </div>
-
-                <div className="id-number">
-                    <label className="form__label" htmlFor="idNumber">National ID Number </label>
-                    <input className="form__input" type="text" pattern = "[0-9]*" value = {idNumber}
-                        onChange = {(e) => handleInputChange(e)} 
-                        id="idNumber" placeholder="National ID Number"
                     />
                 </div>
 

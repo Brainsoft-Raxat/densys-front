@@ -6,7 +6,7 @@ function PatientModification({thePatient}) {
 
     const [dateOfBirth, setDateOfBirth] = useState(thePatient.dateOfBirth);
     const [iinNumber, setIIN] = useState(thePatient.iinNumber);
-    const [idNumber, setID] = useState(thePatient.idNumber);
+    //const [idNumber, setID] = useState(thePatient.idNumber);
     const [firstName, setFirstName] = useState(thePatient.firstName);
     const [middleName, setMiddleName] = useState(thePatient.middleName);
     const [lastName, setLastName] = useState(thePatient.lastName);
@@ -18,7 +18,7 @@ function PatientModification({thePatient}) {
     const [maritalStatus, setMaritalStatus] = useState(thePatient.maritalStatus);
     const [dateOfReg, setDateOfReg] = useState(thePatient.dateOfReg);
 
-    console.log(dateOfBirth, iinNumber, idNumber, firstName, middleName, 
+    console.log(dateOfBirth, iinNumber, firstName, middleName, 
         lastName, bloodGroup, emergencyContactNumber, contactNumber, email, 
         addressP, maritalStatus, dateOfReg);
 
@@ -33,9 +33,9 @@ function PatientModification({thePatient}) {
             setIIN(value);
         }
 
-        if (id === "idNumber") {
+       /* if (id === "idNumber") {
             setID(value);
-        }
+        }*/
 
         if (id === "firstName") {
             setFirstName(value);
@@ -82,7 +82,7 @@ function PatientModification({thePatient}) {
 
     const[patients, setPatients] = useState([
         {dateOfBirth: '2000-06-12', iinNumber: '000612400567',
-        idNumber: '050750097', firstName: 'Ardak', middleName: 'Bolatkyzy',
+        firstName: 'Ardak', middleName: 'Bolatkyzy',
         lastName: 'Azamat', bloodGroup: 'A+', emergencyContactNumber: '+77005553535',
         contactNumber: '+77479866889', email: 'ardakbolat@email.kz', addressP: 'Kabanbay Batyr 35, Block 32, Apt. 913',
         maritalStatus: 'single', dateOfReg: '2022-01-02'}
@@ -96,7 +96,7 @@ function PatientModification({thePatient}) {
         localStorage.setItem('patients', JSON.stringify(patients))
     })
 
-    const updatedPatient = {dateOfBirth, iinNumber, idNumber, firstName, middleName, 
+    const updatedPatient = {dateOfBirth, iinNumber, firstName, middleName, 
         lastName, bloodGroup, emergencyContactNumber, contactNumber, email, 
         addressP, maritalStatus, dateOfReg}
 
@@ -105,7 +105,7 @@ function PatientModification({thePatient}) {
     }
 
     const handleSubmit = (e) => {
-        console.log(dateOfBirth, iinNumber, idNumber, firstName, middleName, 
+        console.log(dateOfBirth, iinNumber, firstName, middleName, 
             lastName, bloodGroup, emergencyContactNumber, contactNumber, email, 
             addressP, maritalStatus, dateOfReg);
 
@@ -130,14 +130,6 @@ function PatientModification({thePatient}) {
                     <input className="form__input" type="text" pattern = "[0-9]*" value = {iinNumber} 
                         onChange = {(e) => handleInputChange(e)} 
                         id="iinNumber" placeholder="IIN Number"
-                    />
-                </div>
-
-                <div className="id-number">
-                    <label className="form__label" htmlFor="idNumber">National ID Number </label>
-                    <input className="form__input" type="text" pattern = "[0-9]*" value = {idNumber}
-                        onChange = {(e) => handleInputChange(e)} 
-                        id="idNumber" placeholder="National ID Number"
                     />
                 </div>
 

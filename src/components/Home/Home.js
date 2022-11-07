@@ -9,7 +9,7 @@ import PatientModification from "../admin/patientModification";
 export default function Home() {
     let doctor = {
         dateOfBirth: '2000-06-12', iinNumber: '000612400567',
-        idNumber: '050750097', firstName: 'Ardak', middleName: 'Bolatkyzy',
+        firstName: 'Ardak', middleName: 'Bolatkyzy',
         lastName: 'Azamat', contactNumber: '+77479866889', departmentID: 'DEPT123',
         specDetID: 'SPEC675', expYears: '20', photoOfDoctor: '', docCategory: 'Highest',
         appPrice: '10000', schedule: 'MONWEDFRI', education: 'NUSOM',
@@ -19,7 +19,7 @@ export default function Home() {
 
     let patient = {
         dateOfBirth: '2000-06-12', iinNumber: '000612400567',
-        idNumber: '050750097', firstName: 'Ardak', middleName: 'Bolatkyzy',
+        firstName: 'Ardak', middleName: 'Bolatkyzy',
         lastName: 'Azamat', bloodGroup: 'A+', emergencyContactNumber: '+77005553535',
         contactNumber: '+77479866889', email: 'ardakbolat@email.kz', addressP: 'Kabanbay Batyr 35, Block 32, Apt. 913',
         maritalStatus: 'single', dateOfReg: '2022-01-02'

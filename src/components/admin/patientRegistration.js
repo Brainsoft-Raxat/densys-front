@@ -4,7 +4,7 @@ function PatientRegistrarion() {
 
     const [dateOfBirth, setDateOfBirth] = useState("");
     const [iinNumber, setIIN] = useState("");
-    const [idNumber, setID] = useState("");
+    //const [idNumber, setID] = useState("");
     const [firstName, setFirstName] = useState("");
     const [middleName, setMiddleName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -27,9 +27,9 @@ function PatientRegistrarion() {
             setIIN(value);
         }
 
-        if (id === "idNumber") {
+        /*if (id === "idNumber") {
             setID(value);
-        }
+        }*/
 
         if (id === "firstName") {
             setFirstName(value);
@@ -74,7 +74,7 @@ function PatientRegistrarion() {
     }
 
     const handleSubmit = (e) => {
-        console.log(dateOfBirth, iinNumber, idNumber, firstName, middleName, 
+        console.log(dateOfBirth, iinNumber, firstName, middleName, 
             lastName, bloodGroup, emergencyContactNumber, contactNumber, email, 
             addressP, maritalStatus, dateOfReg);
         
@@ -97,14 +97,6 @@ function PatientRegistrarion() {
                     <input className="form__input" type="text" pattern = "[0-9]*" value = {iinNumber} 
                         onChange = {(e) => handleInputChange(e)} 
                         id="iinNumber" placeholder="IIN Number"
-                    />
-                </div>
-
-                <div className="id-number">
-                    <label className="form__label" htmlFor="idNumber">National ID Number </label>
-                    <input className="form__input" type="text" pattern = "[0-9]*" value = {idNumber}
-                        onChange = {(e) => handleInputChange(e)} 
-                        id="idNumber" placeholder="National ID Number"
                     />
                 </div>
 
