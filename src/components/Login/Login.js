@@ -16,6 +16,7 @@ import {
 
 import {setAuthToken} from "../helpers/setAuthToken";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 function Copyright(props) {
     return (
@@ -47,27 +48,36 @@ export default function Login() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
-            email: data.get('email'),
+            login: data.get('login'),
             password: data.get('password'),
         });
 
         const loginPayload = {
-            email: data.get('email'),
+            login: data.get('login'),
             password: data.get('password')
         }
 
-        if (loginPayload.email === '1' && loginPayload.password === '1') {
-            // post request to backend with token
-            const token = "my-token"
+        var config = {
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            }
+        };
 
-            localStorage.setItem("token", token);
+        axios.post('http://localhost:3000/sign-in', JSON.stringify(loginPayload), config)
+            .then(function (response) {
+                const token = response.data.data.token
+                localStorage.setItem("token", token)
+                setAuthToken(token)
 
-            setAuthToken(token);
+                navigate("/admin-page")
 
-            navigate("/admin-page")
-        } else {
-            alert('login failed')
-        }
+            })
+            .catch(function (error) {
+                alert("login failed")
+                console.log(JSON.stringify(loginPayload))
+                console.log(error);
+            });
+
     };
 
     return (
@@ -92,10 +102,10 @@ export default function Login() {
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
+                            id="login"
+                            label="login"
+                            name="login"
+                            autoComplete="login"
                             autoFocus
                         />
                         <TextField

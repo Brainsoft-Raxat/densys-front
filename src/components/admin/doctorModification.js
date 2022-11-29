@@ -2,27 +2,27 @@ import React, {useState, useEffect} from 'react';
 import './style.css'
 
 
-function DoctorModification({theDoctor}) {
+function DoctorModification() {
 
 
-    const [dateOfBirth, setDateOfBirth] = useState(theDoctor.dateOfBirth);
-    const [iinNumber, setIIN] = useState(theDoctor.iinNumber);
+    const [dateOfBirth, setDateOfBirth] = useState();
+    const [iinNumber, setIIN] = useState();
    // const [idNumber, setID] = useState(theDoctor.idNumber);
-    const [firstName, setFirstName] = useState(theDoctor.firstName);
-    const [middleName, setMiddleName] = useState(theDoctor.middleName);
-    const [lastName, setLastName] = useState(theDoctor.lastName);
-    const [contactNumber, setContactNumber] = useState(theDoctor.contactNumber);
-    const [departmentID, setDepartmentID] = useState(theDoctor.departmentID);
-    const [specDetID, setSpecDetID] = useState(theDoctor.specDetID);
-    const [expYears, setExpYears] = useState(theDoctor.expYears);
-    const [photoOfDoctor, setPhotoOfDoctor] = useState(theDoctor.photoOfDoctor);
-    const [docCategory, setDocCategory] = useState(theDoctor.docCategory);
-    const [appPrice, setAppPrice] = useState(theDoctor.appPrice);
-    const [schedule, setSchedule] = useState(theDoctor.schedule);
-    const [education, setEducation] = useState(theDoctor.education);
-    const [ratingDoc, setRating] = useState(theDoctor.ratingDoc);
-    const [addressDoc, setAddressDoc] = useState(theDoctor.addressDoc);
-    const [homepageURL, setHomepageURL] = useState(theDoctor.homepageURL);
+    const [firstName, setFirstName] = useState();
+    const [middleName, setMiddleName] = useState();
+    const [lastName, setLastName] = useState();
+    const [contactNumber, setContactNumber] = useState();
+    const [departmentID, setDepartmentID] = useState();
+    const [specDetID, setSpecDetID] = useState();
+    const [expYears, setExpYears] = useState();
+    const [photoOfDoctor, setPhotoOfDoctor] = useState();
+    const [docCategory, setDocCategory] = useState();
+    const [appPrice, setAppPrice] = useState();
+    const [schedule, setSchedule] = useState();
+    const [education, setEducation] = useState();
+    const [ratingDoc, setRating] = useState();
+    const [addressDoc, setAddressDoc] = useState();
+    const [homepageURL, setHomepageURL] = useState();
 
     const handleInputChange = (e) => {
         const {id, value} = e.target; 

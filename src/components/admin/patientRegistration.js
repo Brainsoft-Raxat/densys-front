@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './style.css'
+import axios from "axios";
 function PatientRegistrarion() {
 
     const [dateOfBirth, setDateOfBirth] = useState("");
@@ -77,6 +78,27 @@ function PatientRegistrarion() {
         console.log(dateOfBirth, iinNumber, firstName, middleName, 
             lastName, bloodGroup, emergencyContactNumber, contactNumber, email, 
             addressP, maritalStatus, dateOfReg);
+
+        const req = {
+            "first_name": firstName,
+            "last_name" : lastName,
+            "birth_date" : dateOfBirth,
+            "iin" : iinNumber,
+            "phone" : contactNumber,
+            "address" : addressP,
+            "email" : email,
+            "blood_type": parseInt(bloodGroup, 10),
+            "marit_st": maritalStatus,
+            "emer_contact": emergencyContactNumber
+        }
+
+        axios.post("http://localhost:3000/patients/sign-up", JSON.stringify(req))
+            .then(function (response) {
+                console.log(response)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         
     }
     

@@ -5,6 +5,9 @@ import {Routes, Route} from "react-router-dom";
 import PatientRegistration from "../admin/patientRegistration";
 import DoctorModification from "../admin/doctorModification";
 import PatientModification from "../admin/patientModification";
+import DoctorView from "../admin/doctorView";
+import {Container} from '@mui/material';
+import PatientView from "../admin/patientView";
 
 export default function Home() {
     let doctor = {
@@ -25,28 +28,39 @@ export default function Home() {
         maritalStatus: 'single', dateOfReg: '2022-01-02'
     }
 
-    return (<div>
-        <Nav/>
-        <Routes>
-            <Route
-                path="doctor-registration"
-                element={<DoctorRegistration/>}
-            />
-            <Route
-                path="patient-registration"
-                element={<PatientRegistration/>}
-            />
-            <Route
-                path="doctor-modification"
-                element={<DoctorModification theDoctor={doctor}/>}
-            />
-            <Route
-                path="patient-modification"
-                element={<PatientModification thePatient={patient}/>}
-            />
-            <Route
-
-            />
-        </Routes>
-    </div>)
+    return (
+        <div>
+            <Nav/>
+            <Container fixed>
+                <Routes>
+                    <Route
+                        path="doctor-registration"
+                        element={<DoctorRegistration/>}
+                    />
+                    <Route
+                        path="patient-registration"
+                        element={<PatientRegistration/>}
+                    />
+                    <Route
+                        path="doctor-modification"
+                        element={<DoctorView/>}
+                    />
+                    {/*<Route*/}
+                    {/*    path="doctor-modification"*/}
+                    {/*    element={<DoctorModification theDoctor={doctor}/>}*/}
+                    {/*/>*/}
+                    {/*<Route*/}
+                    {/*    path="patient-modification"*/}
+                    {/*    element={<PatientModification thePatient={patient}/>}*/}
+                    {/*/>*/}
+                    <Route
+                        path="patient-modification"
+                        element={<PatientView/>}
+                    />
+                    <Route path="patient-modification/:id" element={<PatientModification/>}/>
+                    <Route path="doctor-modification/:id" element={<DoctorModification/>}/>
+                </Routes>
+            </Container>
+        </div>
+    )
 }
