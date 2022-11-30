@@ -1,0 +1,256 @@
+.rectangleDiv,
+.rectangleDiv1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.rectangleDiv1 {
+  height: 100%;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-gray-100);
+}
+.rectangleDiv {
+  width: 1280px;
+  height: 251px;
+}
+.frameDiv,
+.groupDiv {
+  position: absolute;
+  top: 51.81px;
+  left: 310px;
+  height: 48.89px;
+}
+.groupDiv {
+  top: 0;
+  left: 0;
+  width: 1282px;
+  height: 251px;
+}
+.chooseTheDoctorAndTimeSlo,
+.theListOfDoctorsWithOphta {
+  position: absolute;
+  top: 88px;
+  left: 164px;
+  font-size: var(--font-size-4xl);
+  color: var(--color-gray-600);
+  display: inline-block;
+}
+.theListOfDoctorsWithOphta {
+  top: 150px;
+  left: 319px;
+  font-size: var(--font-size-3xl);
+}
+.alikhanNurzhanovDiv {
+  position: relative;
+  display: inline-block;
+}
+.frameDiv2 {
+  position: absolute;
+  top: 14px;
+  left: 168px;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-md);
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: var(--font-size-2xl);
+  color: var(--color-gray-700);
+}
+.workExperience8Years {
+  position: relative;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  width: 187px;
+  flex-shrink: 0;
+}
+.frameDiv3,
+.frameDiv4 {
+  position: absolute;
+  top: 61px;
+  left: 168px;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-md);
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: var(--color-gray-800);
+}
+.frameDiv4 {
+  top: 90px;
+}
+.unnamed1Icon {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 158px;
+  height: 154px;
+  object-fit: cover;
+}
+.lineDiv {
+  position: absolute;
+  top: 156px;
+  left: 1px;
+  border-top: 2px solid var(--color-gray-200);
+  box-sizing: border-box;
+  width: 419px;
+  height: 2px;
+}
+.frameDiv5 {
+  top: 164px;
+  left: 12px;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-md);
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: var(--font-size-xl);
+  color: var(--color-gray-400);
+}
+.frameDiv5,
+.lineDiv1,
+.rectangleDiv2 {
+  position: absolute;
+  box-sizing: border-box;
+}
+.lineDiv1 {
+  top: -1px;
+  left: 159px;
+  border-right: 2px solid var(--color-gray-200);
+  width: 2px;
+  height: 158px;
+}
+.rectangleDiv2 {
+  top: 0;
+  left: 0;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  width: 159px;
+  height: 32px;
+}
+.wed10Am11Am {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  font-weight: 300;
+  display: inline-block;
+}
+.groupDiv2,
+.groupDiv3,
+.rectangleDiv4 {
+  position: absolute;
+  top: 212px;
+  left: 28px;
+  width: 159px;
+  height: 32px;
+}
+.groupDiv3,
+.rectangleDiv4 {
+  top: 257px;
+}
+.rectangleDiv4 {
+  top: 0;
+  left: 0;
+  background-color: var(--color-gray-100);
+  border: 1px solid var(--color-gray-200);
+  box-sizing: border-box;
+  width: 188px;
+  height: 46px;
+}
+.bookAppoinetmentDiv {
+  position: absolute;
+  top: 10.51px;
+  left: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 165.53px;
+  height: 24.97px;
+}
+.groupDiv4 {
+  position: absolute;
+  top: 313px;
+  left: 112px;
+  width: 188px;
+  height: 46px;
+  text-align: center;
+}
+.groupDiv5,
+.rectangleDiv5 {
+  position: absolute;
+  width: 149px;
+  height: 32px;
+}
+.rectangleDiv5 {
+  top: 0;
+  left: 0;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  box-sizing: border-box;
+}
+.groupDiv5 {
+  top: 212px;
+  left: 230px;
+}
+.fri10Am11Am {
+  position: absolute;
+  top: 6px;
+  left: 7px;
+  font-weight: 300;
+  display: inline-block;
+}
+.frameDiv1,
+.groupDiv6 {
+  position: absolute;
+  top: 257px;
+  left: 230px;
+  width: 149px;
+  height: 32px;
+}
+.frameDiv1 {
+  top: 0;
+  left: 0;
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gray-200);
+  box-sizing: border-box;
+  width: 419px;
+  height: 384px;
+}
+.groupDiv1,
+.groupDiv13,
+.groupDiv19,
+.groupDiv7 {
+  position: absolute;
+  top: 319px;
+  left: 162px;
+  width: 419px;
+  height: 384px;
+}
+.groupDiv13,
+.groupDiv19,
+.groupDiv7 {
+  top: 751px;
+}
+.groupDiv13,
+.groupDiv19 {
+  top: 319px;
+  left: 698px;
+}
+.groupDiv19 {
+  top: 751px;
+}
+.doctorListPage {
+  position: relative;
+  background-color: var(--color-white);
+  width: 100%;
+  height: 1094px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-base);
+  color: var(--color-gray-300);
+  font-family: var(--font-roboto);
+}

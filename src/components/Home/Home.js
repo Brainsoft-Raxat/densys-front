@@ -8,6 +8,8 @@ import PatientModification from "../admin/patientModification";
 import DoctorView from "../admin/doctorView";
 import {Container} from '@mui/material';
 import PatientView from "../admin/patientView";
+import DoctorListPage from "../admin/DoctorListPage";
+import SearchPage from "../admin/SearchPage";
 
 export default function Home() {
     let doctor = {
@@ -59,6 +61,8 @@ export default function Home() {
                     />
                     <Route path="patient-modification/:id" element={<PatientModification/>}/>
                     <Route path="doctor-modification/:id" element={<DoctorModification/>}/>
+                    <Route path="search-page" element={<SearchPage/>}/>
+                    <Route path="doctor-list" element={<DoctorListPage/>}/>
                 </Routes>
             </Container>
         </div>

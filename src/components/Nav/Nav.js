@@ -17,12 +17,14 @@ import {useNavigate} from "react-router-dom";
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const pages = ['Add Doctor', "Add Patient", "Modify Doctor", "Modify Patient"];
+const pages = ['Add Doctor', "Add Patient", "Modify Doctor", "Modify Patient", "View Doctors", "Search"];
 const mapPageToLink = {
     "Add Doctor": "/admin-page/doctor-registration",
     "Add Patient": "/admin-page/patient-registration",
     "Modify Doctor": "/admin-page/doctor-modification",
-    "Modify Patient": "/admin-page/patient-modification"
+    "Modify Patient": "/admin-page/patient-modification",
+    "View Doctors": "/admin-page/doctor-list",
+    "Search": "/admin-page/search-page"
 }
 
 function Nav() {
@@ -48,7 +50,7 @@ function Nav() {
     };
 
     const handleCloseUserMenu = (setting) => {
-        if(setting === "Logout") {
+        if (setting === "Logout") {
             localStorage.removeItem("token")
 
             navigate("/login")
@@ -70,7 +72,7 @@ function Nav() {
                         href="/"
                         sx={{
                             mr: 2,
-                            display: { xs: 'none', md: 'flex' },
+                            display: {xs: 'none', md: 'flex'},
                             fontFamily: 'monospace',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
@@ -81,7 +83,7 @@ function Nav() {
                         Densys
                     </Typography>
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                    <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -90,7 +92,7 @@ function Nav() {
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >
-                            <MenuIcon />
+                            <MenuIcon/>
                         </IconButton>
                         <Menu
                             id="menu-appbar"
@@ -107,7 +109,7 @@ function Nav() {
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                             sx={{
-                                display: { xs: 'block', md: 'none' },
+                                display: {xs: 'block', md: 'none'},
                             }}
                         >
                             {pages.map((page) => (
@@ -117,7 +119,7 @@ function Nav() {
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    <AdbIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
                     <Typography
                         variant="h5"
                         noWrap
@@ -125,7 +127,7 @@ function Nav() {
                         href=""
                         sx={{
                             mr: 2,
-                            display: { xs: 'flex', md: 'none' },
+                            display: {xs: 'flex', md: 'none'},
                             flexGrow: 1,
                             fontFamily: 'monospace',
                             fontWeight: 700,
@@ -136,26 +138,26 @@ function Nav() {
                     >
                         LOGO
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                         {pages.map((page) => (
                             <Button
                                 key={page}
                                 onClick={handleClickLink.bind(this, page)}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={{my: 2, color: 'white', display: 'block'}}
                             >
                                 {page}
                             </Button>
                         ))}
                     </Box>
 
-                    <Box sx={{ flexGrow: 0 }}>
+                    <Box sx={{flexGrow: 0}}>
                         <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                            <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
+                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
                             </IconButton>
                         </Tooltip>
                         <Menu
-                            sx={{ mt: '45px' }}
+                            sx={{mt: '45px'}}
                             id="menu-appbar"
                             anchorEl={anchorElUser}
                             anchorOrigin={{
@@ -182,4 +184,5 @@ function Nav() {
         </AppBar>
     );
 }
+
 export default Nav;
