@@ -33,7 +33,6 @@ export default function Home() {
     return (
         <div>
             <Nav/>
-            <Container fixed>
                 <Routes>
                     <Route
                         path="doctor-registration"
@@ -64,7 +63,6 @@ export default function Home() {
                     <Route path="search-page" element={<SearchPage/>}/>
                     <Route path="doctor-list" element={<DoctorListPage/>}/>
                 </Routes>
-            </Container>
         </div>
     )
 }
