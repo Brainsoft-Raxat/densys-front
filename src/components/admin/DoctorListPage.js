@@ -141,7 +141,7 @@ const DoctorListPage = (props) => {
             console.log("props.deptId: " + props.deptId);
             setDeptId(+props.deptId);
             if (dept_id > 0) {
-                fetch(`http://swe-backend.herokuapp.com/doctors/departments/${dept_id}?page_num=${currentPage}&page_size=6`)
+                fetch(`https://swe-backend.herokuapp.com/doctors/departments/${dept_id}?page_num=${currentPage}&page_size=6`)
                     .then(response => response.json())
                     .then(data => {
                         setCountDoctors(data.data.count);

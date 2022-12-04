@@ -90,7 +90,7 @@ function PatientModification() {
 
         let id = searchParams.get("id")
 
-        axios.get(`http://swe-backend.herokuapp.com/patients/${id}`)
+        axios.get(`https://swe-backend.herokuapp.com/patients/${id}`)
             .then(function (response) {
                 console.log(response.data.data)
                 setID(prevState => (
@@ -180,7 +180,7 @@ function PatientModification() {
             "email": email
         }
 
-        axios.put(`http://swe-backend.herokuapp.com/patients/${id}`, JSON.stringify(patient))
+        axios.put(`https://swe-backend.herokuapp.com/patients/${id}`, JSON.stringify(patient))
             .then(function (response) {
 
             })
