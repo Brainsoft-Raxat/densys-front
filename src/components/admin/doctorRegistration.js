@@ -158,7 +158,7 @@ function DoctorRegistration() {
             "rating": 1
         }
 
-        axios.post("http://swe-backend.herokuapp.com/doctors/sign-up", JSON.stringify(req))
+        axios.post("https://swe-backend.herokuapp.com/doctors/sign-up", JSON.stringify(req))
             .then(function (response) {
                 console.log(response)
             })

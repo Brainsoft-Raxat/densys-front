@@ -23,7 +23,7 @@ export default function DoctorView() {
     }
 
     useEffect(() => {
-        axios.get("http://swe-backend.herokuapp.com/doctors")
+        axios.get("https://swe-backend.herokuapp.com/doctors")
             .then(function (response) {
                 console.log(response.data.data)
                 setDoctors(prevState => (

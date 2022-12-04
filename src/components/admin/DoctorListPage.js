@@ -46,7 +46,7 @@ const DoctorListPage = (props) => {
         reg_date: dayjs().format("YYYY-MM-DD"),
         reg_time: ""
     });
-    const [timeSlots, setTimeSlots] = React.useState(['10:00', '10:30', '11:00', '11:30']);
+    const [timeSlots, setTimeSlots] = React.useState([]);
 
 
     const navigate = useNavigate();
@@ -88,7 +88,7 @@ const DoctorListPage = (props) => {
                     ]
                 ));
             })
-    }, [booking.reg_date, timeSlots]);
+    }, [booking.reg_date]);
 
     const handleBook = () => {
         console.log(booking);
@@ -141,7 +141,7 @@ const DoctorListPage = (props) => {
             console.log("props.deptId: " + props.deptId);
             setDeptId(+props.deptId);
             if (dept_id > 0) {
-                fetch(`http://swe-backend.herokuapp.com/doctors/departments/${dept_id}?page_num=${currentPage}&page_size=6`)
+                fetch(`https://swe-backend.herokuapp.com/doctors/departments/${dept_id}?page_num=${currentPage}&page_size=6`)
                     .then(response => response.json())
                     .then(data => {
                         setCountDoctors(data.data.count);

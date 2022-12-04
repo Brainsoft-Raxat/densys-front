@@ -92,7 +92,7 @@ function PatientRegistrarion() {
             "emer_contact": emergencyContactNumber
         }
 
-        axios.post("http://swe-backend.herokuapp.com/patients/sign-up", JSON.stringify(req))
+        axios.post("https://swe-backend.herokuapp.com/patients/sign-up", JSON.stringify(req))
             .then(function (response) {
                 console.log(response)
             })

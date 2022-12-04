@@ -73,7 +73,7 @@ function Nav(props) {
     };
 
     useEffect(() => {
-        fetch(`http://swe-backend.herokuapp.com/doctors/departments`)
+        fetch(`https://swe-backend.herokuapp.com/doctors/departments`)
             .then(response => response.json())
             .then(data => {
                 setDepts(prevState => (
