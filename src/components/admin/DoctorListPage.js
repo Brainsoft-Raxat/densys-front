@@ -46,7 +46,7 @@ const DoctorListPage = (props) => {
         reg_date: dayjs().format("YYYY-MM-DD"),
         reg_time: ""
     });
-    const [timeSlots, setTimeSlots] = React.useState(['10:00', '10:30', '11:00', '11:30']);
+    const [timeSlots, setTimeSlots] = React.useState([]);
 
 
     const navigate = useNavigate();
@@ -88,7 +88,7 @@ const DoctorListPage = (props) => {
                     ]
                 ));
             })
-    }, [booking.reg_date, timeSlots]);
+    }, [booking.reg_date]);
 
     const handleBook = () => {
         console.log(booking);
