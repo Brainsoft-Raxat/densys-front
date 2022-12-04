@@ -302,7 +302,6 @@ const SearchPage = () => {
             {selectedDoctor &&
                 <Dialog
                     open={open}
-                    TransitionComponent={Transition}
                     keepMounted
                     onClose={handleClose}
                     aria-describedby="alert-dialog-slide-description"
