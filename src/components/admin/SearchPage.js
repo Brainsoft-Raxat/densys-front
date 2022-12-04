@@ -1,16 +1,110 @@
 import styles from "./SearchPage.module.css";
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { useNavigate } from "react-router-dom";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Select, Slide,
+  Stack,
+  TextField
+} from "@mui/material";
+import Box from "@mui/material/Box";
+import {DesktopDatePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
 
 
 const SearchPage = () => {
   const [search_input, setSearchInput] = useState("");
   const [countDoctors, setCountDoctors] = React.useState(-1);
   const [numOfPages, setNumOfPages] = React.useState(0);
+  const [dept_id, setDeptId] = React.useState(1);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [doctors, setDoctors] = useState([])
   const navigate = useNavigate();
+
+  const [selectedDoctor, setSelectedDoctor] = React.useState(null);
+  const [booking, setBooking] = React.useState({
+    doctor_id: -1,
+    iin: "",
+    phone: "",
+    email: "",
+    reg_date: dayjs().format("YYYY-MM-DD"),
+    reg_time: ""
+  });
+  const [timeSlots, setTimeSlots] = React.useState(['10:00', '10:30', '11:00', '11:30']);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = (doctor) => {
+    setSelectedDoctor(doctor);
+    setBooking({
+      ...booking,
+      doctor_id: doctor.doctor_id
+    })
+    setOpen(true);
+  };
+
+  const handleChange = (e) => {
+    setBooking({
+      ...booking,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleDateChange = (date) => {
+    setBooking({
+      ...booking,
+      reg_date: dayjs(date).format("YYYY-MM-DD")
+    })
+  }
+
+
+  useEffect(() => {
+      // fetch(`https://swe-backend.herokuapp.com/doctors/list/${dept_id}/${currentPage}`)
+  }, [booking.reg_date]);
+
+  const handleBook = () => {
+    console.log(booking);
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(booking)
+    };
+
+    fetch('https://swe-backend.herokuapp.com/doctors/appointment', requestOptions)
+        .then(response => response.json())
+        .then(data => {
+          if (data.status !== 0) {
+            alert(data.message);
+          } else {
+            alert("Booked successfully");
+          }
+        })
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
 
   const handleSubmit = (e) =>{
 
@@ -22,6 +116,10 @@ const SearchPage = () => {
     
   }
 
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
+
   const handleOnSearch = (string, search_input) => {
     console.log(string, search_input);
     setSearchInput(string);
@@ -31,9 +129,18 @@ const SearchPage = () => {
     //console.log(result);
   };
 
-  const handleOnSelect = (item) => {
-    // console.log(item);
+  const handleOnSelect = (doctor) => {
+    console.log(doctor);
+    setSelectedDoctor(doctor);
+    setBooking({
+      ...booking,
+      doctor_id: doctor.doctor_id
+    })
+    setOpen(true);
   };
+
+  useEffect(() => {
+  }, [selectedDoctor])
 
   const handleOnFocus = () => {
     // console.log("Focused");
@@ -54,10 +161,9 @@ const SearchPage = () => {
   };
 
   useEffect(() => {
-    fetch(`https://swe-backend.herokuapp.com/doctors/?search=${search_input}&page_num=${currentPage}&page_size=6`)
+    fetch(`https://swe-backend.herokuapp.com/doctors/?search=${search_input}&page_num=${currentPage}&page_size=10`)
       .then(response => response.json())
       .then(data => {
-            console.log('data: ' + data.data.doctors)
             setCountDoctors(data.data.count)
             if (data.data.count > 0) {
               setDoctors(prevState => (
@@ -186,6 +292,59 @@ const SearchPage = () => {
           </div>
         </div>
     </div>
+
+      {selectedDoctor &&
+          <Dialog
+              open={open}
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={handleClose}
+              aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle>Book Appointment with Dr. {selectedDoctor.first_name}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-slide-description">
+                <Box component="form" sx={{'& > :not(style)': {m: 1, width: '25ch'}}} noValidate
+                     autoComplete="off">
+                  <Stack spacing={3}>
+                    <TextField id="outlined-basic" label="IIN" variant="outlined" name="iin"
+                               onChange={handleChange}/>
+                    <TextField id="outlined-basic" label="Phone" variant="outlined" name="phone"
+                               onChange={handleChange}/>
+                    <TextField id="outlined-basic" label="Email" variant="outlined" name="email"
+                               onChange={handleChange}/>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DesktopDatePicker
+                          label="Date of Appointment"
+                          value={dayjs(booking.reg_date, "YYYY-MM-DD")}
+                          inputFormat="YYYY-MM-DD"
+                          onChange={handleDateChange}
+                          renderInput={(params) => <TextField {...params} />}
+                      />
+                      <Select
+                          label="Time"
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          variant="outlined"
+                          name="reg_time"
+                          value={booking.reg_time}
+                          onChange={handleChange}
+                      >
+                        {Array.from(timeSlots.map((time_slot, index) => (
+                            <MenuItem value={time_slot} key={index}>{time_slot}</MenuItem>
+                        )))
+                        }
+                      </Select>
+                    </LocalizationProvider>
+                  </Stack>
+                </Box>
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleBook}>Book</Button>
+            </DialogActions>
+          </Dialog>
+      }
       </div>
   );
 };

@@ -12,7 +12,7 @@
   background-color: var(--color-gray-100);
 }
 .rectangleDiv {
-  width: 1280px;
+  width: 100%;
   height: 251px;
 }
 .frameDiv,
@@ -25,7 +25,7 @@
 .groupDiv {
   top: 0;
   left: 0;
-  width: 1282px;
+  width: 100%;
   height: 251px;
 }
 .chooseTheDoctorAndTimeSlo,
@@ -39,7 +39,7 @@
 }
 .theListOfDoctorsWithOphta {
   top: 150px;
-  left: 319px;
+  /*left: 319px;*/
   font-size: var(--font-size-3xl);
 }
 .alikhanNurzhanovDiv {
@@ -247,7 +247,7 @@
   position: relative;
   background-color: var(--color-white);
   width: 100%;
-  height: 1094px;
+  height: 150vh;
   overflow: hidden;
   text-align: left;
   font-size: var(--font-size-base);

@@ -63,7 +63,7 @@ export default function Login() {
             }
         };
 
-        axios.post('http://localhost:3000/sign-in', JSON.stringify(loginPayload), config)
+        axios.post('http://swe-backend.herokuapp.com/sign-in', JSON.stringify(loginPayload), config)
             .then(function (response) {
                 const token = response.data.data.token
                 localStorage.setItem("token", token)

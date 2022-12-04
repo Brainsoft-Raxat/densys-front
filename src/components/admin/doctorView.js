@@ -19,21 +19,16 @@ export default function DoctorView() {
     const navigate = useNavigate();
 
     function handleClick(row) {
-        navigate({
-            pathname: 'doctor-modification',
-            search: createSearchParams({
-                id: row.ID
-            }).toString(),
-        });
+        navigate(`/doctor-modification/${row.id}`);
     }
 
     useEffect(() => {
-        axios.get("http://localhost:3000/doctors/all")
+        axios.get("http://swe-backend.herokuapp.com/doctors")
             .then(function (response) {
                 console.log(response.data.data)
                 setDoctors(prevState => (
                     [
-                        ...response.data.data
+                        ...response.data.data.doctors
                     ]
                 ))
             })

@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import './style.css'
+import {useParams} from "react-router-dom";
 
 
 function DoctorModification() {
 
-
+    const [params, setParams] = useState(useParams())
     const [dateOfBirth, setDateOfBirth] = useState();
     const [iinNumber, setIIN] = useState();
    // const [idNumber, setID] = useState(theDoctor.idNumber);
@@ -134,7 +135,6 @@ function DoctorModification() {
             lastName, contactNumber, departmentID, specDetID, expYears,
             photoOfDoctor, docCategory, appPrice, schedule, education,
             ratingDoc, addressDoc, homepageURL);
-
         updateDoctor(iinNumber, updatedDoctor);
         
     }

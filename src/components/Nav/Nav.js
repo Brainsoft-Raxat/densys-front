@@ -14,6 +14,8 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import {useNavigate} from "react-router-dom";
+import {FormControl, InputLabel, Select} from "@mui/material";
+import {useEffect, useRef} from "react";
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -27,11 +29,14 @@ const mapPageToLink = {
     "Search": "/admin-page/search-page"
 }
 
-function Nav() {
+function Nav(props) {
     const navigate = useNavigate()
 
+    const [depts, setDepts] = React.useState([]);
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorElDepartments, setAnchorElDepartments] = React.useState(null);
+
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -39,6 +44,14 @@ function Nav() {
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
+
+    const handleOpenDepartmentsMenus = (event) => {
+        setAnchorElDepartments(event.currentTarget);
+    }
+
+    const handleCloseDepartmentsMenus = (event) => {
+        setAnchorElDepartments(null);
+    }
 
     const handleCloseNavMenu = (page) => {
         navigate(mapPageToLink[page])
@@ -58,6 +71,19 @@ function Nav() {
         }
         setAnchorElUser(null);
     };
+
+    useEffect(() => {
+        fetch(`http://swe-backend.herokuapp.com/doctors/departments`)
+            .then(response => response.json())
+            .then(data => {
+                setDepts(prevState => (
+                    [
+                        ...data.data.departments
+                    ]
+                ));
+            });
+    }, [anchorElDepartments])
+
 
     return (
         <AppBar position="static">
@@ -148,6 +174,36 @@ function Nav() {
                                 {page}
                             </Button>
                         ))}
+                        <Button title="Departments" sx={{my: 2, color: 'white', display: 'block'}}
+                                onClick={handleOpenDepartmentsMenus}>
+                            Departments
+                        </Button>
+                        <Menu
+                            sx={{mt: '45px'}}
+                            id="menu-appbar"
+                            anchorEl={anchorElDepartments}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={Boolean(anchorElDepartments)}
+                            onClose={handleCloseDepartmentsMenus}
+                        >
+                            {Array.from(depts.map((dept, index) => (
+                                <MenuItem key={dept.department_id} onClick={(e) => {
+                                    navigate("/admin-page/doctor-list/" + dept.department_id)
+                                    props.setDeptId(dept.department_id)
+                                }}>
+                                    <Typography textAlign="center">{dept.department_name}</Typography>
+                                </MenuItem>
+                            )))}
+
+                        </Menu>
                     </Box>
 
                     <Box sx={{flexGrow: 0}}>
@@ -177,6 +233,7 @@ function Nav() {
                                     <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
                             ))}
+
                         </Menu>
                     </Box>
                 </Toolbar>

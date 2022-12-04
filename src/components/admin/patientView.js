@@ -26,7 +26,7 @@ export default function PatientView() {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3000/patients/all")
+        axios.get("http://swe-backend.herokuapp.com/patients/all")
             .then(function (response) {
                 console.log(response.data.data)
                 setPatients(prevState => (

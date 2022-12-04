@@ -1,218 +1,264 @@
-import styles from "./DoctorListPage.module.css";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import {
+    Alert,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle, InputLabel,
+    Modal,
+    Pagination, Select, Slide,
+    Stack, TextField
+} from "@mui/material";
+import {useEffect, useRef} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import Box from "@mui/material/Box";
+import {DesktopDatePicker, DesktopTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import dayjs from "dayjs";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import MenuItem from "@mui/material/MenuItem";
 
-const DoctorListPage = () => {
-  return (
-    <div className={styles.doctorListPage}>
-      <div className={styles.groupDiv}>
-        <div className={styles.rectangleDiv}>
-          <div className={styles.rectangleDiv1} />
-        </div>
-        <div className={styles.frameDiv} />
-      </div>
-      <div className={styles.chooseTheDoctorAndTimeSlo}>
-        Choose the doctor and time slot for your appointment
-      </div>
-      <div className={styles.theListOfDoctorsWithOphta}>
-        The list of doctors with Ophtalmogy specialty
-      </div>
-      <div className={styles.groupDiv1}>
-        <div className={styles.frameDiv1}>
-          <div className={styles.frameDiv2}>
-            <div className={styles.alikhanNurzhanovDiv}>Alikhan Nurzhanov</div>
-          </div>
-          <div className={styles.frameDiv3}>
-            <div className={styles.workExperience8Years}>
-              Work experience: 8 years
-            </div>
-          </div>
-          <div className={styles.frameDiv4}>
-            <div className={styles.workExperience8Years}>
-              Total patients treated: 143
-            </div>
-          </div>
-          <img
-            className={styles.unnamed1Icon}
-            alt=""
-            src="../unnamed-1@2x.png"
-          />
-          <div className={styles.lineDiv} />
-          <div className={styles.frameDiv5}>
-            <div className={styles.alikhanNurzhanovDiv}>
-              Available time slots
-            </div>
-          </div>
-          <div className={styles.lineDiv1} />
-          <div className={styles.groupDiv2}>
-            <div className={styles.rectangleDiv2} />
-            <div className={styles.wed10Am11Am}>{`Wed:  10 am - 11 am  `}</div>
-          </div>
-          <div className={styles.groupDiv3}>
-            <div className={styles.rectangleDiv2} />
-            <div className={styles.wed10Am11Am}>{`Wed:  11 am - 12 am  `}</div>
-          </div>
-          <div className={styles.groupDiv4}>
-            <div className={styles.rectangleDiv4} />
-            <div className={styles.bookAppoinetmentDiv}>Book appoinetment</div>
-          </div>
-          <div className={styles.groupDiv5}>
-            <div className={styles.rectangleDiv5} />
-            <div className={styles.wed10Am11Am}>{`Thu:  12 pm - 1 pm  `}</div>
-          </div>
-          <div className={styles.groupDiv6}>
-            <div className={styles.rectangleDiv5} />
-            <div className={styles.fri10Am11Am}>{`Fri:  10 am - 11 am  `}</div>
-          </div>
-        </div>
-      </div>
-      <div className={styles.groupDiv7}>
-        <div className={styles.frameDiv1}>
-          <div className={styles.frameDiv2}>
-            <div className={styles.alikhanNurzhanovDiv}>Alikhan Nurzhanov</div>
-          </div>
-          <div className={styles.frameDiv3}>
-            <div className={styles.workExperience8Years}>
-              Work experience: 8 years
-            </div>
-          </div>
-          <div className={styles.frameDiv4}>
-            <div className={styles.workExperience8Years}>
-              Total patients treated: 143
-            </div>
-          </div>
-          <img
-            className={styles.unnamed1Icon}
-            alt=""
-            src="../unnamed-1@2x.png"
-          />
-          <div className={styles.lineDiv} />
-          <div className={styles.frameDiv5}>
-            <div className={styles.alikhanNurzhanovDiv}>
-              Available time slots
-            </div>
-          </div>
-          <div className={styles.lineDiv1} />
-          <div className={styles.groupDiv2}>
-            <div className={styles.rectangleDiv2} />
-            <div className={styles.wed10Am11Am}>{`Wed:  10 am - 11 am  `}</div>
-          </div>
-          <div className={styles.groupDiv3}>
-            <div className={styles.rectangleDiv2} />
-            <div className={styles.wed10Am11Am}>{`Wed:  11 am - 12 am  `}</div>
-          </div>
-          <div className={styles.groupDiv4}>
-            <div className={styles.rectangleDiv4} />
-            <div className={styles.bookAppoinetmentDiv}>Book appoinetment</div>
-          </div>
-          <div className={styles.groupDiv5}>
-            <div className={styles.rectangleDiv5} />
-            <div className={styles.wed10Am11Am}>{`Thu:  12 pm - 1 pm  `}</div>
-          </div>
-          <div className={styles.groupDiv6}>
-            <div className={styles.rectangleDiv5} />
-            <div className={styles.fri10Am11Am}>{`Fri:  10 am - 11 am  `}</div>
-          </div>
-        </div>
-      </div>
-      <div className={styles.groupDiv13}>
-        <div className={styles.frameDiv1}>
-          <div className={styles.frameDiv2}>
-            <div className={styles.alikhanNurzhanovDiv}>Alikhan Nurzhanov</div>
-          </div>
-          <div className={styles.frameDiv3}>
-            <div className={styles.workExperience8Years}>
-              Work experience: 8 years
-            </div>
-          </div>
-          <div className={styles.frameDiv4}>
-            <div className={styles.workExperience8Years}>
-              Total patients treated: 143
-            </div>
-          </div>
-          <img
-            className={styles.unnamed1Icon}
-            alt=""
-            src="../unnamed-1@2x.png"
-          />
-          <div className={styles.lineDiv} />
-          <div className={styles.frameDiv5}>
-            <div className={styles.alikhanNurzhanovDiv}>
-              Available time slots
-            </div>
-          </div>
-          <div className={styles.lineDiv1} />
-          <div className={styles.groupDiv2}>
-            <div className={styles.rectangleDiv2} />
-            <div className={styles.wed10Am11Am}>{`Wed:  10 am - 11 am  `}</div>
-          </div>
-          <div className={styles.groupDiv3}>
-            <div className={styles.rectangleDiv2} />
-            <div className={styles.wed10Am11Am}>{`Wed:  11 am - 12 am  `}</div>
-          </div>
-          <div className={styles.groupDiv4}>
-            <div className={styles.rectangleDiv4} />
-            <div className={styles.bookAppoinetmentDiv}>Book appoinetment</div>
-          </div>
-          <div className={styles.groupDiv5}>
-            <div className={styles.rectangleDiv5} />
-            <div className={styles.wed10Am11Am}>{`Thu:  12 pm - 1 pm  `}</div>
-          </div>
-          <div className={styles.groupDiv6}>
-            <div className={styles.rectangleDiv5} />
-            <div className={styles.fri10Am11Am}>{`Fri:  10 am - 11 am  `}</div>
-          </div>
-        </div>
-      </div>
-      <div className={styles.groupDiv19}>
-        <div className={styles.frameDiv1}>
-          <div className={styles.frameDiv2}>
-            <div className={styles.alikhanNurzhanovDiv}>Alikhan Nurzhanov</div>
-          </div>
-          <div className={styles.frameDiv3}>
-            <div className={styles.workExperience8Years}>
-              Work experience: 8 years
-            </div>
-          </div>
-          <div className={styles.frameDiv4}>
-            <div className={styles.workExperience8Years}>
-              Total patients treated: 143
-            </div>
-          </div>
-          <img
-            className={styles.unnamed1Icon}
-            alt=""
-            src="../unnamed-1@2x.png"
-          />
-          <div className={styles.lineDiv} />
-          <div className={styles.frameDiv5}>
-            <div className={styles.alikhanNurzhanovDiv}>
-              Available time slots
-            </div>
-          </div>
-          <div className={styles.lineDiv1} />
-          <div className={styles.groupDiv2}>
-            <div className={styles.rectangleDiv2} />
-            <div className={styles.wed10Am11Am}>{`Wed:  10 am - 11 am  `}</div>
-          </div>
-          <div className={styles.groupDiv3}>
-            <div className={styles.rectangleDiv2} />
-            <div className={styles.wed10Am11Am}>{`Wed:  11 am - 12 am  `}</div>
-          </div>
-          <div className={styles.groupDiv4}>
-            <div className={styles.rectangleDiv4} />
-            <div className={styles.bookAppoinetmentDiv}>Book appoinetment</div>
-          </div>
-          <div className={styles.groupDiv5}>
-            <div className={styles.rectangleDiv5} />
-            <div className={styles.wed10Am11Am}>{`Thu:  12 pm - 1 pm  `}</div>
-          </div>
-          <div className={styles.groupDiv6}>
-            <div className={styles.rectangleDiv5} />
-            <div className={styles.fri10Am11Am}>{`Fri:  10 am - 11 am  `}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const DoctorListPage = (props) => {
+    const [doctors, setDoctors] = React.useState([]);
+    const [selectedDoctor, setSelectedDoctor] = React.useState(null);
+    const [countDoctors, setCountDoctors] = React.useState(-1);
+    const [numOfPages, setNumOfPages] = React.useState(0);
+    const [currentPage, setCurrentPage] = React.useState(1);
+    const [dept_id, setDeptId] = React.useState(1);
+    const [params, setParams] = React.useState(useParams());
+    const [booking, setBooking] = React.useState({
+        doctor_id: -1,
+        iin: "",
+        phone: "",
+        email: "",
+        reg_date: dayjs().format("YYYY-MM-DD"),
+        reg_time: ""
+    });
+    const [timeSlots, setTimeSlots] = React.useState(['10:00', '10:30', '11:00', '11:30']);
+
+
+    const navigate = useNavigate();
+    const previousDeptIdRef = useRef(props.deptId);
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = (doctor) => {
+        setSelectedDoctor(doctor);
+        setBooking({
+            ...booking,
+            doctor_id: doctor.doctor_id
+        })
+        setOpen(true);
+    };
+
+    const handleChange = (e) => {
+        setBooking({
+            ...booking,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleDateChange = (date) => {
+        setBooking({
+            ...booking,
+            reg_date: dayjs(date).format("YYYY-MM-DD")
+        })
+    }
+
+
+    useEffect(() => {
+        fetch(`https://swe-backend.herokuapp.com/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
+            .then(response => response.json())
+            .then(data => {
+                setTimeSlots(prevState => (
+                    [
+                        ...data.data.empty_slots
+                    ]
+                ));
+            })
+    }, [booking.reg_date, timeSlots]);
+
+    const handleBook = () => {
+        console.log(booking);
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(booking)
+        };
+
+        fetch('https://swe-backend.herokuapp.com/doctors/appointments/', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status !== 0) {
+                    alert(data.message);
+                } else {
+                    alert("Booked successfully");
+                    fetch(`https://swe-backend.herokuapp.com/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            setTimeSlots(prevState => (
+                                [
+                                    ...data.data.empty_slots
+                                ]
+                            ))});
+                }
+            })
+
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
+
+
+    useEffect(() => {
+            console.log("props.deptId changed");
+            console.log("props.deptId: " + props.deptId);
+            setDeptId(+props.deptId);
+            if (dept_id > 0) {
+                fetch(`http://swe-backend.herokuapp.com/doctors/departments/${dept_id}?page_num=${currentPage}&page_size=6`)
+                    .then(response => response.json())
+                    .then(data => {
+                        setCountDoctors(data.data.count);
+                        if (data.data.count > 0) {
+                            setDoctors(prevState => (
+                                [
+                                    ...data.data.doctors
+                                ]
+                            ));
+                        }
+                        setNumOfPages(Math.ceil(data.data.count / 6))
+                    });
+            }
+    }, [props.deptId, currentPage, dept_id, params, countDoctors])
+
+
+    return (
+        <Container sx={{m: 2}}>
+            {countDoctors > 0 ? <Grid container sx={{m: 2}} spacing={{xs: 2, md: 3}} columns={{xs: 4, sm: 8, md: 12}}>
+                    {Array.from(doctors.map((doctor, index) => (
+                        <Grid item xs={2} sm={4} md={4} key={index}>
+                            <Card sx={{maxWidth: 300}}>
+                                <CardMedia
+                                    component="img"
+                                    alt="green iguana"
+                                    height="250"
+                                    image={require('../images/unnamed-1@2x.png')}
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        {doctor.first_name} {doctor.last_name}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Department: {doctor.department}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Specialization: {doctor.spec}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Phone: {doctor.phone}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Degree: {doctor.degree}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Experience: {doctor.experience}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions style={{justifyContent: 'center'}}>
+                                    <Button variant="outlined" onClick={handleClickOpen.bind(this, doctor)}>
+                                        Book Appointment
+                                    </Button>
+                                </CardActions>
+                            </Card>
+                        </Grid>
+                    )))}
+                </Grid>
+                : <Alert severity="warning">No doctors found</Alert>
+            }
+            <Stack spacing={2} alignItems="center">
+                <Pagination count={numOfPages} onChange={(event, value) => setCurrentPage(value)}/>
+            </Stack>
+
+            {selectedDoctor &&
+                <Dialog
+                    open={open}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={handleClose}
+                    aria-describedby="alert-dialog-slide-description"
+                >
+                    <DialogTitle>Book Appointment with Dr. {selectedDoctor.first_name}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-slide-description">
+                            <Box component="form" sx={{'& > :not(style)': {m: 1, width: '25ch'}}} noValidate
+                                 autoComplete="off">
+                                <Stack spacing={3}>
+                                    <TextField id="outlined-basic" label="IIN" variant="outlined" name="iin"
+                                               onChange={handleChange}/>
+                                    <TextField id="outlined-basic" label="Phone" variant="outlined" name="phone"
+                                               onChange={handleChange}/>
+                                    <TextField id="outlined-basic" label="Email" variant="outlined" name="email"
+                                               onChange={handleChange}/>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DesktopDatePicker
+                                            label="Date of Appointment"
+                                            value={dayjs(booking.reg_date, "YYYY-MM-DD")}
+                                            inputFormat="YYYY-MM-DD"
+                                            onChange={handleDateChange}
+                                            renderInput={(params) => <TextField {...params} />}
+                                        />
+                                        <Select
+                                            label="Time"
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            variant="outlined"
+                                            name="reg_time"
+                                            value={booking.reg_time}
+                                            onChange={handleChange}
+                                        >
+                                            {Array.from(timeSlots.map((time_slot, index) => (
+                                                <MenuItem value={time_slot} key={index}>{time_slot}</MenuItem>
+                                            )))
+                                            }
+                                        </Select>
+                                    </LocalizationProvider>
+                                </Stack>
+                            </Box>
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleBook}>Book</Button>
+                    </DialogActions>
+                </Dialog>
+            }
+        </Container>
+    );
 };
 
 export default DoctorListPage;
