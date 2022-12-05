@@ -36,7 +36,7 @@ const theme = createTheme();
 
 export default function Login() {
     const navigate = useNavigate()
-    const isAuth = JSON.parse(localStorage.getItem('isAuth'))
+    const isAuth = JSON.parse(localStorage.getItem('token'))
 
     if (isAuth) {
         // window.location.href = '/admin-page'
@@ -69,7 +69,7 @@ export default function Login() {
                 console.log(response)
                 if (response.status == 200){
                     console.log("login success")
-                    localStorage.setItem("isAuth", true)
+                    localStorage.setItem("token", true)
                     navigate("/admin-page")
                 } else {
                     alert("login failed")
