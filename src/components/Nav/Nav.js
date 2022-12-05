@@ -16,6 +16,7 @@ import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import {useNavigate} from "react-router-dom";
 import {FormControl, InputLabel, Select} from "@mui/material";
 import {useEffect, useRef} from "react";
+import {HOST} from "../Home/Home";
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -73,7 +74,7 @@ function Nav(props) {
     };
 
     useEffect(() => {
-        fetch(`http://swe-backend.herokuapp.com/doctors/departments`)
+        fetch(HOST + `/doctors/departments`)
             .then(response => response.json())
             .then(data => {
                 setDepts(prevState => (

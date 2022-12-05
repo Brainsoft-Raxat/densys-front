@@ -26,6 +26,7 @@ import {DesktopDatePicker, DesktopTimePicker, LocalizationProvider} from "@mui/x
 import dayjs from "dayjs";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import MenuItem from "@mui/material/MenuItem";
+import {HOST} from "../Home/Home";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -142,7 +143,7 @@ const DoctorListPage = (props) => {
             console.log("props.deptId: " + props.deptId);
             setDeptId(+props.deptId);
             if (dept_id > 0) {
-                fetch(`http://swe-backend.herokuapp.com/doctors/departments/${dept_id}?page_num=${currentPage}&page_size=6`)
+                fetch(HOST + `/doctors/departments/${dept_id}?page_num=${currentPage}&page_size=6`)
                     .then(response => response.json())
                     .then(data => {
                         setCountDoctors(data.data.count);
