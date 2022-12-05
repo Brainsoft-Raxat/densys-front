@@ -78,7 +78,6 @@ export default function Login() {
                 console.log(JSON.stringify(loginPayload))
                 console.log(error);
             });
-
     };
 
     return (
