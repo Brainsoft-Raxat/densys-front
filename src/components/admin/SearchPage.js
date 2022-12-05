@@ -90,7 +90,7 @@ const SearchPage = () => {
             body: JSON.stringify(booking)
         };
 
-        axios.post(HOST + `/doctors/appointments/`, JSON.stringify(booking))
+        axios.post(HOST + `/doctors/appointments`, JSON.stringify(booking))
             .then(function (response) {
                 if (response.status === 200) {
                     alert("Appointment booked successfully")
@@ -171,19 +171,6 @@ const SearchPage = () => {
             })
             .catch(function (error) {
                 checkStatusCode(error, navigate)
-            })
-        fetch(HOST + `/doctors/?search=${search_input}&page_num=${currentPage}&page_size=6`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('data: ' + data.data.doctors)
-                setCountDoctors(data.data.count)
-                if (data.data.count > 0) {
-                    setDoctors(prevState => (
-                        [
-                            ...data.data.doctors
-                        ]
-                    ))
-                }
             });
     }, [search_input])
 

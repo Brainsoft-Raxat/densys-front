@@ -101,7 +101,7 @@ const DoctorListPage = (props) => {
     const handleBook = () => {
         console.log(booking);
 
-        axios.post(HOST + `/doctors/appointments/`, JSON.stringify(booking))
+        axios.post(HOST + `/doctors/appointments`, JSON.stringify(booking))
             .then(function (response) {
                 if (response.status === 200) {
                     alert("Appointment booked successfully")

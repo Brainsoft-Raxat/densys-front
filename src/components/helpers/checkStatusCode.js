@@ -6,7 +6,7 @@ export const checkStatusCode = (error, navigate) => {
             axios.post('https://backend.swe.works/refresh-token')
                 .then(res => {})
                 .catch(error => {
-                    localStorage.setItem("isAuth", false)
+                    localStorage.removeItem("token")
                     navigate()
                 })
             break;
