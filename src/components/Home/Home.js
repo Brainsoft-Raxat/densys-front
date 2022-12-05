@@ -59,7 +59,6 @@ export default function Home() {
                     <Route path="doctor-list/:dept_id" element={<DoctorListPage deptId={deptId}/>}/>
                 </Routes>
             {/*</Container>*/}
-            {/*    */}
             </Box>
         </div>
     )

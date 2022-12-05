@@ -8,8 +8,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from "axios";
 import {createSearchParams, useNavigate} from "react-router-dom";
-import {HOST} from "../Home/Home";
-import {checkStatusCode} from "../helpers/checkStatusCode";
 
 export default function DoctorView() {
 
@@ -25,7 +23,7 @@ export default function DoctorView() {
     }
 
     useEffect(() => {
-        axios.get(HOST + "/doctors")
+        axios.get("http://swe-backend.herokuapp.com/doctors")
             .then(function (response) {
                 console.log(response.data.data)
                 setDoctors(prevState => (
@@ -35,7 +33,6 @@ export default function DoctorView() {
                 ))
             })
             .catch(function (error) {
-                checkStatusCode(error, navigate)
                 console.log(error);
             });
     }, [])

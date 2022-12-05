@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { createTheme } from '@mui/material/styles';
+import {createTheme} from '@mui/material/styles';
 import {
     Avatar,
     Box,
@@ -14,29 +14,9 @@ import {
     ThemeProvider
 } from "@mui/material";
 
-import { setAuthToken } from "../helpers/setAuthToken";
-import { useNavigate } from "react-router-dom";
+import {setAuthToken} from "../helpers/setAuthToken";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import {HOST} from "../Home/Home";
-
-export function useAuth() {
-    const getAuth = () => {
-        const isAuth = localStorage.getItem('Auth');
-        return isAuth
-    };
-
-    const [isAuth, setAuth] = React.useState(getAuth());
-
-    const saveAuth = isAuth => {
-        localStorage.setItem('Auth', true);
-        setAuth(isAuth);
-    };
-
-    return {
-        setAuth: saveAuth,
-        isAuth
-    }
-}
 
 function Copyright(props) {
     return (
@@ -54,24 +34,9 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-async function loginUser(credentials) {
-    return fetch('https://backend.swe.works/sign-in', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify(credentials),
-    }).then(res => {
-        console.log(res.json()); // undefined
-        localStorage.setItem("isAuth", true)
-    });
-}
-
 export default function Login() {
     const navigate = useNavigate()
-    const isAuth = JSON.parse(localStorage.getItem('isAuth'))
+    const isAuth = JSON.parse(localStorage.getItem('token'))
 
     if (isAuth) {
         // window.location.href = '/admin-page'
@@ -79,7 +44,7 @@ export default function Login() {
     }
     // let emailValid = false;
     // let emailClicked = false;
-    const handleSubmit = async event => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
@@ -88,13 +53,40 @@ export default function Login() {
             password: data.get('password')
         }
         console.log(loginPayload)
-        await loginUser(loginPayload);
+
+        const instance = axios.create({
+            withCredentials: true
+        });
+
+        var config = {
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            }
+        };
+
+        instance.post('https://backend.swe.works/sign-in', JSON.stringify(loginPayload), config)
+            .then(function (response) {
+                console.log(response)
+                if (response.status == 200){
+                    console.log("login success")
+                    localStorage.setItem("token", true)
+                    navigate("/admin-page")
+                } else {
+                    alert("login failed")
+                }
+            })
+            .catch(function (error) {
+                alert("login failed")
+                console.log(JSON.stringify(loginPayload))
+                console.log(error);
+            });
+
     };
 
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
-                <CssBaseline />
+                <CssBaseline/>
                 <Box
                     sx={{
                         marginTop: 8,
@@ -103,12 +95,12 @@ export default function Login() {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
                     </Avatar>
                     <Typography component="h1" variant="h5">
 
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
                         <TextField
                             margin="normal"
                             required
@@ -130,14 +122,14 @@ export default function Login() {
                             autoComplete="current-password"
                         />
                         <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
+                            control={<Checkbox value="remember" color="primary"/>}
                             label="Remember me"
                         />
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{mt: 3, mb: 2}}
                         >
                             Sign In
                         </Button>
@@ -150,7 +142,7 @@ export default function Login() {
                         </Grid>
                     </Box>
                 </Box>
-                <Copyright sx={{ mt: 8, mb: 4 }} />
+                <Copyright sx={{mt: 8, mb: 4}}/>
             </Container>
         </ThemeProvider>
     );
