@@ -37,44 +37,44 @@ const theme = createTheme();
 
 export default function Login() {
     const navigate = useNavigate()
+    const isAuth = JSON.parse(localStorage.getItem('isAuth'))
 
-    if (localStorage.getItem("token")) {
+    if (isAuth) {
         // window.location.href = '/admin-page'
         navigate("/admin-page")
     }
-
     // let emailValid = false;
     // let emailClicked = false;
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            login: data.get('login'),
-            password: data.get('password'),
-        });
 
         const loginPayload = {
             login: data.get('login'),
             password: data.get('password')
         }
+        console.log(loginPayload)
+
+        const instance = axios.create({
+            withCredentials: true
+        });
 
         var config = {
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
-            },
-            withCredentials: false
+            }
         };
 
-        axios.post(HOST + '/sign-in', JSON.stringify(loginPayload), config)
+        instance.post('https://backend.swe.works/sign-in', JSON.stringify(loginPayload), config)
             .then(function (response) {
-                localStorage.setItem("token", "1")
-                setAuthToken("1")
-
+                console.log(response)
+                console.log("login success")
+                localStorage.setItem("isAuth", true)
                 navigate("/admin-page")
-
             })
             .catch(function (error) {
                 alert("login failed")
+                console.log(JSON.stringify(loginPayload))
                 console.log(error);
             });
 

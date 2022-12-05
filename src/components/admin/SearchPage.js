@@ -120,7 +120,7 @@ const SearchPage = () => {
         const {id, value} = e.target;
 
         navigate({
-            pathname: '/admin-page/doctor-view/' + id,
+            pathname: '/admin-page/doctor-list/' + id,
         });
 
     }
