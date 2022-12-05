@@ -113,7 +113,7 @@ const SearchPage = () => {
         const {id, value} = e.target;
 
         navigate({
-            pathname: '/admin-page/doctor-view/' + id,
+            pathname: '/admin-page/doctor-list/' + id,
         });
 
     }
@@ -224,7 +224,7 @@ const SearchPage = () => {
                             >
                                 Allergy and immunology
                             </a>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="allergy" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="1" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
@@ -233,14 +233,14 @@ const SearchPage = () => {
                             <div className={styles.dermatologyAndSkin}>
                                 Dermatology and skin
                             </div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="dermatology" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="2" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
                     <div className={styles.frameDiv5}>
                         <div className={styles.groupDiv6}>
                             <div className={styles.dermatologyAndSkin}>Family medicine</div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="familymed" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="4" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
@@ -249,14 +249,14 @@ const SearchPage = () => {
                             <div className={styles.dermatologyAndSkin}>
                                 Radiation oncology
                             </div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="oncology" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="9" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
                     <div className={styles.frameDiv7}>
                         <div className={styles.groupDiv6}>
                             <div className={styles.dermatologyAndSkin}>Gastrology</div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="gastrology" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="5" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
@@ -265,14 +265,14 @@ const SearchPage = () => {
                             <div className={styles.dermatologyAndSkin}>
                                 Physical and reahbilitation
                             </div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="reahbilitation"
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="8"
                                    alt="" onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
                     <div className={styles.frameDiv9}>
                         <div className={styles.groupDiv6}>
                             <div className={styles.dermatologyAndSkin}>Neurology</div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="neurology" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="6" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
@@ -281,14 +281,14 @@ const SearchPage = () => {
                             <div className={styles.dermatologyAndSkin}>
                                 Diagnostic radiology
                             </div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="radiology" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="3" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
                     <div className={styles.frameDiv11}>
                         <div className={styles.groupDiv6}>
                             <div className={styles.dermatologyAndSkin}>Ophtalmology</div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="ophtalmology" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="7" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
