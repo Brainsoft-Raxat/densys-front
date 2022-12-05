@@ -36,7 +36,12 @@ const theme = createTheme();
 
 export default function Login() {
     const navigate = useNavigate()
+    const isAuth = JSON.parse(localStorage.getItem('isAuth'))
 
+    if (isAuth) {
+        // window.location.href = '/admin-page'
+        navigate("/admin-page")
+    }
     // let emailValid = false;
     // let emailClicked = false;
     const handleSubmit = (event) => {
@@ -61,15 +66,19 @@ export default function Login() {
 
         instance.post('https://backend.swe.works/sign-in', JSON.stringify(loginPayload), config)
             .then(function (response) {
-                if(response.status(200)) {
+                console.log(response)
+                if (response.status == 200){
+                    localStorage.setItem("isAuth", true)
                     navigate("/admin-page")
-                }
-
-                else {
+                } else {
                     alert("login failed")
-                    console.log(JSON.stringify(loginPayload))
                 }
 
+            })
+            .catch(function (error) {
+                alert("login failed")
+                console.log(JSON.stringify(loginPayload))
+                console.log(error);
             });
 
     };
