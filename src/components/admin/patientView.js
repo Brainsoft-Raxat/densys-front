@@ -8,7 +8,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from "axios";
 import {createSearchParams, useNavigate} from "react-router-dom";
-import {HOST} from "../Home/Home";
 
 export default function PatientView() {
 
@@ -27,7 +26,7 @@ export default function PatientView() {
 
 
     useEffect(() => {
-        axios.get(HOST + "/patients/all")
+        axios.get("http://swe-backend.herokuapp.com/patients/all")
             .then(function (response) {
                 console.log(response.data.data)
                 setPatients(prevState => (

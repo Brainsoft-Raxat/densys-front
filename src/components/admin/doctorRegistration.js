@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import './style.css'
 import axios from "axios";
 import {setAuthToken} from "../helpers/setAuthToken";
-import {HOST} from "../Home/Home";
 
 function DoctorRegistration() {
 
@@ -159,7 +158,7 @@ function DoctorRegistration() {
             "rating": 1
         }
 
-        axios.post(HOST + "/doctors/sign-up", JSON.stringify(req))
+        axios.post("http://swe-backend.herokuapp.com/doctors/sign-up", JSON.stringify(req))
             .then(function (response) {
                 console.log(response)
             })

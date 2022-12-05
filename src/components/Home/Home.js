@@ -10,11 +10,6 @@ import {Container, Box} from '@mui/material';
 import PatientView from "../admin/patientView";
 import DoctorListPage from "../admin/DoctorListPage";
 import SearchPage from "../admin/SearchPage";
-import {Create} from "@mui/icons-material";
-import CreateDoctor from "../admin/createDoctor";
-
-export const HOST = "https://backend.swe.works";
-// export const HOST = "https://localhost:3000";
 
 export default function Home() {
     const [deptId, setDeptId] = React.useState(0);
@@ -31,7 +26,7 @@ export default function Home() {
                 <Routes>
                     <Route
                         path="doctor-registration"
-                        element={<CreateDoctor/>}
+                        element={<DoctorRegistration/>}
                     />
                     <Route
                         path="patient-registration"
@@ -59,7 +54,6 @@ export default function Home() {
                     <Route path="doctor-list/:dept_id" element={<DoctorListPage deptId={deptId}/>}/>
                 </Routes>
             {/*</Container>*/}
-            {/*    */}
             </Box>
         </div>
     )
