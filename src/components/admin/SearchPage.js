@@ -19,6 +19,8 @@ import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import {HOST} from "../Home/Home";
+import axios from "axios";
+import {checkStatusCode} from "../helpers/checkStatusCode";
 
 
 const SearchPage = () => {
@@ -63,21 +65,19 @@ const SearchPage = () => {
 
 
     useEffect(() => {
-        fetch(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
-            .then(response => {
-                if (response.ok) {
-                    response.json()
-                } else {
-                    throw Error(response.statusText)
+        axios.get(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
+            .then(function (response) {
+                if (response.status === 200) {
+                    setTimeSlots(prevState => (
+                        [
+                            ...response.data.data.empty_slots
+                        ]
+                    ));
                 }
             })
-            .then(data => {
-                setTimeSlots(prevState => (
-                    [
-                        ...data.data.empty_slots
-                    ]
-                ));
-            })
+            .catch(function (error) {
+                checkStatusCode(error, navigate)
+            });
     }, [booking.reg_date]);
 
 
@@ -90,25 +90,18 @@ const SearchPage = () => {
             body: JSON.stringify(booking)
         };
 
-        fetch(HOST + '/doctors/appointments/', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                if (data.status !== 0) {
-                    alert(data.message);
+        axios.post(HOST + `/doctors/appointments/`, JSON.stringify(booking))
+            .then(function (response) {
+                if (response.status === 200) {
+                    alert("Appointment booked successfully")
+                    setOpen(false);
                 } else {
-                    alert("Booked successfully");
-                    fetch(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            setTimeSlots(prevState => (
-                                [
-                                    ...data.data.empty_slots
-                                ]
-                            ))
-                        });
+                    throw new Error(response.statusText);
                 }
             })
-
+            .catch(function (error) {
+                checkStatusCode(error, navigate)
+            })
     }
 
     const handleClose = () => {
@@ -163,6 +156,22 @@ const SearchPage = () => {
     };
 
     useEffect(() => {
+        axios.get(HOST + `/doctors/?search=${search_input}&page_num=${currentPage}&page_size=6`)
+            .then(function (response) {
+                if (response.status === 200) {
+                    setCountDoctors(response.data.data.count)
+                    if (response.data.data.count > 0) {
+                        setDoctors(prevState => (
+                            [
+                                ...response.data.data.doctors
+                            ]
+                        ))
+                    }
+                }
+            })
+            .catch(function (error) {
+                checkStatusCode(error, navigate)
+            })
         fetch(HOST + `/doctors/?search=${search_input}&page_num=${currentPage}&page_size=6`)
             .then(response => response.json())
             .then(data => {

@@ -27,6 +27,8 @@ import dayjs from "dayjs";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import MenuItem from "@mui/material/MenuItem";
 import {HOST} from "../Home/Home";
+import {checkStatusCode} from "../helpers/checkStatusCode";
+import axios from "axios";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -81,44 +83,36 @@ const DoctorListPage = (props) => {
 
 
     useEffect(() => {
-        fetch(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
-            .then(response => response.json())
-            .then(data => {
-                setTimeSlots(prevState => (
-                    [
-                        ...data.data.empty_slots
-                    ]
-                ));
+        axios.get(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
+            .then(function (response) {
+                if (response.status === 200) {
+                    setTimeSlots(prevState => (
+                                [
+                                    ...response.data.data.empty_slots
+                                ]
+                            ));
+                }
             })
+            .catch(function (error) {
+                checkStatusCode(error, navigate)
+            });
     }, [booking.reg_date]);
 
     const handleBook = () => {
         console.log(booking);
 
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(booking)
-        };
-
-        fetch(HOST + '/doctors/appointments/', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                if (data.status !== 0) {
-                    alert(data.message);
+        axios.post(HOST + `/doctors/appointments/`, JSON.stringify(booking))
+            .then(function (response) {
+                if (response.status === 200) {
+                    alert("Appointment booked successfully")
+                    setOpen(false);
                 } else {
-                    alert("Booked successfully");
-                    fetch(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            setTimeSlots(prevState => (
-                                [
-                                    ...data.data.empty_slots
-                                ]
-                            ))});
+                    throw new Error(response.statusText);
                 }
             })
-
+            .catch(function (error) {
+                checkStatusCode(error, navigate)
+            })
     }
 
     const handleClose = () => {
@@ -143,19 +137,21 @@ const DoctorListPage = (props) => {
             console.log("props.deptId: " + props.deptId);
             setDeptId(+props.deptId);
             if (dept_id > 0) {
-                fetch(HOST + `/doctors/departments/${dept_id}?page_num=${currentPage}&page_size=6`)
-                    .then(response => response.json())
-                    .then(data => {
-                        setCountDoctors(data.data.count);
-                        if (data.data.count > 0) {
+                axios.get(HOST + `/doctors/departments/${dept_id}?page_num=${currentPage}&page_size=6`)
+                    .then(function (response) {
+                    setCountDoctors(response.data.data.count);
+                        if (response.data.data.count > 0) {
                             setDoctors(prevState => (
                                 [
-                                    ...data.data.doctors
+                                    ...response.data.data.doctors
                                 ]
                             ));
                         }
-                        setNumOfPages(Math.ceil(data.data.count / 6))
-                    });
+                        setNumOfPages(Math.ceil(response.data.data.count / 6))
+                    })
+                    .catch(function (error) {
+                        checkStatusCode(error, navigate)
+                    })
             }
     }, [props.deptId, currentPage, dept_id, params, countDoctors])
 
