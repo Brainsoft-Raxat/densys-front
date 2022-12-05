@@ -62,7 +62,8 @@ export default function Login() {
         var config = {
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
-            }
+            },
+            withCredentials: false
         };
 
         instance.post('https://backend.swe.works/sign-in', JSON.stringify(loginPayload), config)

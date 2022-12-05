@@ -8,8 +8,23 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import styles from "./SearchPage.module.css";
 import dayjs from "dayjs";
+import MenuItem from "@mui/material/MenuItem";
 
 function CreateDoctor() {
+    const [depts, setDepts] = React.useState([
+        {
+            id: 1,
+            name: "Cardiology"
+        },
+        {
+            id: 2,
+            name: "Neurology"
+        },
+        {
+            id: 3,
+            name: "Dermatology"
+        }
+    ]);
     const [doctor, setDoctor] = React.useState({
         first_name: '',
         last_name: '',
@@ -20,16 +35,26 @@ function CreateDoctor() {
         address: '',
         email: '',
         department_id: 1,
-        spec_id: 1,
         experience: 0,
         photo: '',
-        category: '',
+        category: 'First',
         price: 0,
         schedule: '',
         degree: '',
         rating: 0,
         webstite_url: '',
     });
+
+    const handleSubmit = (e) => {
+        console.log(doctor);
+    }
+
+    const handleChange = (e) => {
+        setDoctor({
+            ...doctor,
+            [e.target.name]: e.target.value
+        });
+    }
 
     return (
         <div>
@@ -46,6 +71,7 @@ function CreateDoctor() {
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={4}>
                             <TextField
+                                onChange={handleChange}
                                 required
                                 id="first_name"
                                 name="first_name"
@@ -57,6 +83,7 @@ function CreateDoctor() {
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <TextField
+                                onChange={handleChange}
                                 optional
                                 id="middle_name"
                                 name="middle_name"
@@ -68,6 +95,7 @@ function CreateDoctor() {
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <TextField
+                                onChange={handleChange}
                                 required
                                 id="last_name"
                                 name="last_name"
@@ -79,6 +107,7 @@ function CreateDoctor() {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                onChange={handleChange}
                                 required
                                 id="birth_date"
                                 name="birth_date"
@@ -91,6 +120,7 @@ function CreateDoctor() {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                onChange={handleChange}
                                 id="iin"
                                 name="iin"
                                 label="IIN"
@@ -101,6 +131,7 @@ function CreateDoctor() {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                onChange={handleChange}
                                 required
                                 placeholder={"+7xxxxxxxxxxx"}
                                 id="phone"
@@ -113,6 +144,7 @@ function CreateDoctor() {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                onChange={handleChange}
                                 id="email"
                                 name="email"
                                 label="Email"
@@ -123,6 +155,7 @@ function CreateDoctor() {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                onChange={handleChange}
                                 required
                                 id="address"
                                 name="address"
@@ -135,20 +168,115 @@ function CreateDoctor() {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                onChange={handleChange}
+                                select
                                 required
-                                id="country"
-                                name="country"
-                                label="Country"
+                                id="department_id"
+                                name="department_id"
+                                label="Department"
                                 fullWidth
-                                autoComplete="shipping country"
+                                variant="standard"
+                                defaultValue={depts.length && depts[0].id}
+                            >
+                                {depts.length && depts.map((dept) => (
+                                    <MenuItem key={dept.id} value={dept.id}>
+                                        {dept.name}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                onChange={handleChange}
+                                required
+                                id="experience"
+                                name="experience"
+                                label="Experience"
+                                fullWidth
+                                variant="standard"
+                                type="number"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                onChange={handleChange}
+                                id="photo"
+                                name="photo"
+                                fullWidth
+                                variant="outlined"
+                                type='file' />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                select
+                                onChange={handleChange}
+                                required
+                                id="category"
+                                name="category"
+                                label="Category"
+                                fullWidth
+                                variant="standard"
+                                defaultValue='First'
+                            >
+                                <MenuItem key='first' value='First'>
+                                    First
+                                </MenuItem>
+                                <MenuItem key='second' value='Second'>
+                                    Second
+                                </MenuItem>
+                                <MenuItem key='highest' value='Highest'>
+                                    Highest
+                                </MenuItem>
+                            </TextField>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                onChange={handleChange}
+                                required
+                                id="price"
+                                name="price"
+                                label="Price"
+                                fullWidth
+                                variant="standard"
+                                type='number'
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                onChange={handleChange}
+                                required
+                                id="degree"
+                                name="degree"
+                                label="Degree"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                onChange={handleChange}
+                                required
+                                id="rating"
+                                name="rating"
+                                label="Rating"
+                                fullWidth
+                                variant="standard"
+                                type='number'
+                                InputProps={{ inputProps: { min: 0, max: 10 } }}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                onChange={handleChange}
+                                id="webstite_url"
+                                name="webstite_url"
+                                label="Website URL"
+                                fullWidth
                                 variant="standard"
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <FormControlLabel
-                                control={<Checkbox color="secondary" name="saveAddress" value="yes"/>}
-                                label="Use this address for payment details"
-                            />
+                           <Button variant="contained" sx={{bgcolor: "#A0A0AD"}} onClick={handleSubmit}>Add Doctor</Button>
                         </Grid>
                     </Grid>
                 </Paper>

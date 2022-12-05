@@ -5,7 +5,7 @@ body{
 
 .header {
     width: 100%;
-    height: 278px;
+    height: 230px;
     background: #ebebff;
     vertical-align: middle;
     align-content: center;
@@ -16,9 +16,9 @@ body{
 }
 
 .text {
-    line-height: 278px;
+    line-height: 230px;
     vertical-align: middle;
-    height: 278px;
+    height: 230px;
     width: 100%;
 }
 
