@@ -70,6 +70,7 @@ export default function Login() {
                 console.log("login success")
                 localStorage.setItem("isAuth", true)
                 navigate("/admin-page")
+                
             })
             .catch(function (error) {
                 alert("login failed")
@@ -78,6 +79,12 @@ export default function Login() {
             });
 
     };
+
+    React.useEffect(() => {
+        if (localStorage.getItem("isAuth")){
+         navigate("/admin-page")   
+        }
+    },[])
 
     return (
         <ThemeProvider theme={theme}>
