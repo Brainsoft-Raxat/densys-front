@@ -18,6 +18,7 @@ import {DesktopDatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
+import {HOST} from "../Home/Home";
 
 
 const SearchPage = () => {
@@ -62,8 +63,14 @@ const SearchPage = () => {
 
 
     useEffect(() => {
-        fetch(`https://swe-backend.herokuapp.com/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
-            .then(response => response.json())
+        fetch(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
+            .then(response => {
+                if (response.ok) {
+                    response.json()
+                } else {
+                    throw Error(response.statusText)
+                }
+            })
             .then(data => {
                 setTimeSlots(prevState => (
                     [
@@ -83,14 +90,14 @@ const SearchPage = () => {
             body: JSON.stringify(booking)
         };
 
-        fetch('https://swe-backend.herokuapp.com/doctors/appointments/', requestOptions)
+        fetch(HOST + '/doctors/appointments/', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.status !== 0) {
                     alert(data.message);
                 } else {
                     alert("Booked successfully");
-                    fetch(`https://swe-backend.herokuapp.com/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
+                    fetch(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
                         .then(response => response.json())
                         .then(data => {
                             setTimeSlots(prevState => (
@@ -156,7 +163,7 @@ const SearchPage = () => {
     };
 
     useEffect(() => {
-        fetch(`https://swe-backend.herokuapp.com/doctors/?search=${search_input}&page_num=${currentPage}&page_size=6`)
+        fetch(HOST + `/doctors/?search=${search_input}&page_num=${currentPage}&page_size=6`)
             .then(response => response.json())
             .then(data => {
                 console.log('data: ' + data.data.doctors)
@@ -224,7 +231,7 @@ const SearchPage = () => {
                             >
                                 Allergy and immunology
                             </a>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="allergy" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="1" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
@@ -233,14 +240,14 @@ const SearchPage = () => {
                             <div className={styles.dermatologyAndSkin}>
                                 Dermatology and skin
                             </div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="dermatology" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="2" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
                     <div className={styles.frameDiv5}>
                         <div className={styles.groupDiv6}>
                             <div className={styles.dermatologyAndSkin}>Family medicine</div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="familymed" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="4" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
@@ -249,14 +256,14 @@ const SearchPage = () => {
                             <div className={styles.dermatologyAndSkin}>
                                 Radiation oncology
                             </div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="oncology" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="9" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
                     <div className={styles.frameDiv7}>
                         <div className={styles.groupDiv6}>
                             <div className={styles.dermatologyAndSkin}>Gastrology</div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="gastrology" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="5" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
@@ -265,14 +272,14 @@ const SearchPage = () => {
                             <div className={styles.dermatologyAndSkin}>
                                 Physical and reahbilitation
                             </div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="reahbilitation"
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="8"
                                    alt="" onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
                     <div className={styles.frameDiv9}>
                         <div className={styles.groupDiv6}>
                             <div className={styles.dermatologyAndSkin}>Neurology</div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="neurology" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="6" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
@@ -281,14 +288,14 @@ const SearchPage = () => {
                             <div className={styles.dermatologyAndSkin}>
                                 Diagnostic radiology
                             </div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="radiology" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="3" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>
                     <div className={styles.frameDiv11}>
                         <div className={styles.groupDiv6}>
                             <div className={styles.dermatologyAndSkin}>Ophtalmology</div>
-                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="ophtalmology" alt=""
+                            <input type="image" className={styles.down1Icon} src="/down-1.svg" id="7" alt=""
                                    onClick={(e) => handleSubmit(e)}/>
                         </div>
                     </div>

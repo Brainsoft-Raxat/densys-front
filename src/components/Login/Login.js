@@ -17,6 +17,7 @@ import {
 import {setAuthToken} from "../helpers/setAuthToken";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {HOST} from "../Home/Home";
 
 function Copyright(props) {
     return (
@@ -60,21 +61,20 @@ export default function Login() {
         var config = {
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
-            }
+            },
+            withCredentials: false
         };
 
-        axios.post('https://swe-backend.herokuapp.com/sign-in', JSON.stringify(loginPayload), config)
+        axios.post(HOST + '/sign-in', JSON.stringify(loginPayload), config)
             .then(function (response) {
-                const token = response.data.data.token
-                localStorage.setItem("token", token)
-                setAuthToken(token)
+                localStorage.setItem("token", "1")
+                setAuthToken("1")
 
                 navigate("/admin-page")
 
             })
             .catch(function (error) {
                 alert("login failed")
-                console.log(JSON.stringify(loginPayload))
                 console.log(error);
             });
 
