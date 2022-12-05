@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import {createTheme} from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import {
     Avatar,
     Box,
@@ -14,8 +14,8 @@ import {
     ThemeProvider
 } from "@mui/material";
 
-import {setAuthToken} from "../helpers/setAuthToken";
-import {useNavigate} from "react-router-dom";
+import { setAuthToken } from "../helpers/setAuthToken";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {HOST} from "../Home/Home";
 
@@ -83,7 +83,7 @@ export default function Login() {
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
-                <CssBaseline/>
+                <CssBaseline />
                 <Box
                     sx={{
                         marginTop: 8,
@@ -92,12 +92,12 @@ export default function Login() {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                     </Avatar>
                     <Typography component="h1" variant="h5">
 
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
+                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
                             required
@@ -119,14 +119,14 @@ export default function Login() {
                             autoComplete="current-password"
                         />
                         <FormControlLabel
-                            control={<Checkbox value="remember" color="primary"/>}
+                            control={<Checkbox value="remember" color="primary" />}
                             label="Remember me"
                         />
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{mt: 3, mb: 2}}
+                            sx={{ mt: 3, mb: 2 }}
                         >
                             Sign In
                         </Button>
@@ -139,7 +139,7 @@ export default function Login() {
                         </Grid>
                     </Box>
                 </Box>
-                <Copyright sx={{mt: 8, mb: 4}}/>
+                <Copyright sx={{ mt: 8, mb: 4 }} />
             </Container>
         </ThemeProvider>
     );
