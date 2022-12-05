@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import {HOST} from "../Home/Home";
 import {checkStatusCode} from "../helpers/checkStatusCode";
+import {useNavigate} from "react-router-dom";
 
 function CreateDoctor() {
     const [depts, setDepts] = React.useState([
@@ -47,16 +48,17 @@ function CreateDoctor() {
         rating: 0,
         webstite_url: '',
     });
-    const navigate = React.useNavigate();
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
-        axios.put(`${HOST}/doctors/sign-up`, JSON.stringify(doctor))
+        axios.post(`${HOST}/doctors/sign-up`, JSON.stringify(doctor))
             .then(response => {
                 console.log(response)
             })
             .catch(error => {
                 checkStatusCode(error, navigate)
-            })
+
+            });
     }
 
     const handleChange = (e) => {
