@@ -34,6 +34,21 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+async function loginUser(credentials) {
+    return fetch('https://backend.swe.works/sign-in', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(credentials),
+    }).then(res => {
+        console.log(res.json()); // undefined
+        localStorage.setItem("isAuth", true)
+    });
+}
+
 export default function Login() {
     const navigate = useNavigate()
     const isAuth = JSON.parse(localStorage.getItem('token'))
