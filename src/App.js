@@ -7,12 +7,7 @@ import RouteGuard from './components/RouteGuard'
 import NotFound from "./components/NotFound/NotFound";
 
 function App() {
-    const { isAuth, setAuth } = useAuth();
-
-    if(!isAuth) {
-      return <Login setAuth={setAuth} />
-    }
-
+    
     return (
         <div className="App">
             <Routes>
