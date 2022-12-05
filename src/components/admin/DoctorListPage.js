@@ -48,7 +48,7 @@ const DoctorListPage = (props) => {
         reg_date: dayjs().format("YYYY-MM-DD"),
         reg_time: ""
     });
-    const [timeSlots, setTimeSlots] = React.useState(['10:00', '10:30', '11:00', '11:30']);
+    const [timeSlots, setTimeSlots] = React.useState([]);
 
 
     const navigate = useNavigate();
@@ -81,7 +81,7 @@ const DoctorListPage = (props) => {
 
 
     useEffect(() => {
-        fetch(`https://swe-backend.herokuapp.com/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
+        fetch(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
             .then(response => response.json())
             .then(data => {
                 setTimeSlots(prevState => (
@@ -90,7 +90,7 @@ const DoctorListPage = (props) => {
                     ]
                 ));
             })
-    }, [booking.reg_date, timeSlots]);
+    }, [booking.reg_date]);
 
     const handleBook = () => {
         console.log(booking);
@@ -101,14 +101,14 @@ const DoctorListPage = (props) => {
             body: JSON.stringify(booking)
         };
 
-        fetch('https://swe-backend.herokuapp.com/doctors/appointments/', requestOptions)
+        fetch(HOST + '/doctors/appointments/', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.status !== 0) {
                     alert(data.message);
                 } else {
                     alert("Booked successfully");
-                    fetch(`https://swe-backend.herokuapp.com/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
+                    fetch(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
                         .then(response => response.json())
                         .then(data => {
                             setTimeSlots(prevState => (
