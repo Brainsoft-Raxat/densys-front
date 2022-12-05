@@ -67,13 +67,9 @@ export default function Login() {
         instance.post('https://backend.swe.works/sign-in', JSON.stringify(loginPayload), config)
             .then(function (response) {
                 console.log(response)
-                if (response.status == 200){
-                    console.log("login success")
-                    localStorage.setItem("isAuth", true)
-                    navigate("/admin-page")
-                } else {
-                    alert("login failed")
-                }
+                console.log("login success")
+                localStorage.setItem("isAuth", true)
+                navigate("/admin-page")
             })
             .catch(function (error) {
                 alert("login failed")
