@@ -18,6 +18,7 @@ import {DesktopDatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
+import {HOST} from "../Home/Home";
 
 
 const SearchPage = () => {
@@ -62,8 +63,14 @@ const SearchPage = () => {
 
 
     useEffect(() => {
-        fetch(`https://swe-backend.herokuapp.com/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
-            .then(response => response.json())
+        fetch(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
+            .then(response => {
+                if (response.ok) {
+                    response.json()
+                } else {
+                    throw Error(response.statusText)
+                }
+            })
             .then(data => {
                 setTimeSlots(prevState => (
                     [
@@ -83,14 +90,14 @@ const SearchPage = () => {
             body: JSON.stringify(booking)
         };
 
-        fetch('https://swe-backend.herokuapp.com/doctors/appointments/', requestOptions)
+        fetch(HOST + '/doctors/appointments/', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.status !== 0) {
                     alert(data.message);
                 } else {
                     alert("Booked successfully");
-                    fetch(`https://swe-backend.herokuapp.com/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
+                    fetch(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
                         .then(response => response.json())
                         .then(data => {
                             setTimeSlots(prevState => (
@@ -156,7 +163,7 @@ const SearchPage = () => {
     };
 
     useEffect(() => {
-        fetch(`https://swe-backend.herokuapp.com/doctors/?search=${search_input}&page_num=${currentPage}&page_size=6`)
+        fetch(HOST + `/doctors/?search=${search_input}&page_num=${currentPage}&page_size=6`)
             .then(response => response.json())
             .then(data => {
                 console.log('data: ' + data.data.doctors)

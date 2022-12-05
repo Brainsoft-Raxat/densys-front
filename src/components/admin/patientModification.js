@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './style.css'
 import {useSearchParams} from "react-router-dom";
 import axios from "axios";
+import {HOST} from "../Home/Home";
 
 function PatientModification() {
 
@@ -90,7 +91,7 @@ function PatientModification() {
 
         let id = searchParams.get("id")
 
-        axios.get(`https://swe-backend.herokuapp.com/patients/${id}`)
+        axios.get(HOST + `/patients/${id}`)
             .then(function (response) {
                 console.log(response.data.data)
                 setID(prevState => (
@@ -180,7 +181,7 @@ function PatientModification() {
             "email": email
         }
 
-        axios.put(`https://swe-backend.herokuapp.com/patients/${id}`, JSON.stringify(patient))
+        axios.put(HOST + `/patients/${id}`, JSON.stringify(patient))
             .then(function (response) {
 
             })

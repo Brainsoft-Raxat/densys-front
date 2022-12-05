@@ -25,6 +25,7 @@ import {DesktopDatePicker, DesktopTimePicker, LocalizationProvider} from "@mui/x
 import dayjs from "dayjs";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import MenuItem from "@mui/material/MenuItem";
+import {HOST} from "../Home/Home";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -79,7 +80,7 @@ const DoctorListPage = (props) => {
 
 
     useEffect(() => {
-        fetch(`https://swe-backend.herokuapp.com/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
+        fetch(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
             .then(response => response.json())
             .then(data => {
                 setTimeSlots(prevState => (
@@ -99,14 +100,14 @@ const DoctorListPage = (props) => {
             body: JSON.stringify(booking)
         };
 
-        fetch('https://swe-backend.herokuapp.com/doctors/appointments/', requestOptions)
+        fetch(HOST + '/doctors/appointments/', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.status !== 0) {
                     alert(data.message);
                 } else {
                     alert("Booked successfully");
-                    fetch(`https://swe-backend.herokuapp.com/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
+                    fetch(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
                         .then(response => response.json())
                         .then(data => {
                             setTimeSlots(prevState => (
@@ -141,7 +142,7 @@ const DoctorListPage = (props) => {
             console.log("props.deptId: " + props.deptId);
             setDeptId(+props.deptId);
             if (dept_id > 0) {
-                fetch(`https://swe-backend.herokuapp.com/doctors/departments/${dept_id}?page_num=${currentPage}&page_size=6`)
+                fetch(HOST + `/doctors/departments/${dept_id}?page_num=${currentPage}&page_size=6`)
                     .then(response => response.json())
                     .then(data => {
                         setCountDoctors(data.data.count);

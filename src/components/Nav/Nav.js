@@ -16,6 +16,8 @@ import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import {useNavigate} from "react-router-dom";
 import {FormControl, InputLabel, Select} from "@mui/material";
 import {useEffect, useRef} from "react";
+import axios from "axios";
+import {HOST} from "../Home/Home";
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -73,20 +75,28 @@ function Nav(props) {
     };
 
     useEffect(() => {
-        fetch(`https://swe-backend.herokuapp.com/doctors/departments`)
-            .then(response => response.json())
-            .then(data => {
-                setDepts(prevState => (
-                    [
-                        ...data.data.departments
-                    ]
-                ));
-            });
+        axios.get(HOST + `/doctors/departments`)
+            .then(res => {
+                if (res.status === 200) {
+                    setDepts(
+                        prevState => (
+                            [
+                                ...res.data.data.departments
+                            ]
+                        ));
+                } else {
+                    console.log(res.status)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+
+            })
     }, [anchorElDepartments])
 
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{bgcolor: '#525252'}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     {/*<AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />*/}

@@ -14,7 +14,10 @@ import {
     ThemeProvider
 } from "@mui/material";
 
+import { setAuthToken } from "../helpers/setAuthToken";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import {HOST} from "../Home/Home";
 
 export function useAuth() {
     const getAuth = () => {

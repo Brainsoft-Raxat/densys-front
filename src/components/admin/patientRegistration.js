@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './style.css'
 import axios from "axios";
+import {HOST} from "../Home/Home";
 function PatientRegistrarion() {
 
     const [dateOfBirth, setDateOfBirth] = useState("");
@@ -92,7 +93,7 @@ function PatientRegistrarion() {
             "emer_contact": emergencyContactNumber
         }
 
-        axios.post("https://swe-backend.herokuapp.com/patients/sign-up", JSON.stringify(req))
+        axios.post(HOST + "/patients/sign-up", JSON.stringify(req))
             .then(function (response) {
                 console.log(response)
             })
