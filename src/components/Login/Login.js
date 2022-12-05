@@ -37,25 +37,21 @@ const theme = createTheme();
 export default function Login() {
     const navigate = useNavigate()
 
-    if (localStorage.getItem("token")) {
-        // window.location.href = '/admin-page'
-        navigate("/admin-page")
-    }
-
     // let emailValid = false;
     // let emailClicked = false;
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            login: data.get('login'),
-            password: data.get('password'),
-        });
 
         const loginPayload = {
             login: data.get('login'),
             password: data.get('password')
         }
+        console.log(loginPayload)
+
+        const instance = axios.create({
+            withCredentials: true
+        });
 
         var config = {
             headers: {
@@ -63,19 +59,17 @@ export default function Login() {
             }
         };
 
-        axios.post('https://swe-backend.herokuapp.com/sign-in', JSON.stringify(loginPayload), config)
+        instance.post('https://backend.swe.works/sign-in', JSON.stringify(loginPayload), config)
             .then(function (response) {
-                const token = response.data.data.token
-                localStorage.setItem("token", token)
-                setAuthToken(token)
+                if(response.status(200)) {
+                    navigate("/admin-page")
+                }
 
-                navigate("/admin-page")
+                else {
+                    alert("login failed")
+                    console.log(JSON.stringify(loginPayload))
+                }
 
-            })
-            .catch(function (error) {
-                alert("login failed")
-                console.log(JSON.stringify(loginPayload))
-                console.log(error);
             });
 
     };
