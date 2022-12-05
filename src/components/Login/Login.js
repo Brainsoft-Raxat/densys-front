@@ -14,9 +14,26 @@ import {
     ThemeProvider
 } from "@mui/material";
 
-import { setAuthToken } from "../helpers/setAuthToken";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
+export function useAuth() {
+    const getAuth = () => {
+        const isAuth = localStorage.getItem('Auth');
+        return isAuth
+    };
+
+    const [isAuth, setAuth] = React.useState(getAuth());
+
+    const saveAuth = isAuth => {
+        localStorage.setItem('Auth', true);
+        setAuth(isAuth);
+    };
+
+    return {
+        setAuth: saveAuth,
+        isAuth
+    }
+}
 
 function Copyright(props) {
     return (
@@ -34,6 +51,21 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+async function loginUser(credentials) {
+    return fetch('https://backend.swe.works/sign-in', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(credentials),
+    }).then(res => {
+        console.log(res.json()); // undefined
+        localStorage.setItem("isAuth", true)
+    });
+}
+
 export default function Login() {
     const navigate = useNavigate()
     const isAuth = JSON.parse(localStorage.getItem('isAuth'))
@@ -44,7 +76,7 @@ export default function Login() {
     }
     // let emailValid = false;
     // let emailClicked = false;
-    const handleSubmit = (event) => {
+    const handleSubmit = async event => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
@@ -53,30 +85,7 @@ export default function Login() {
             password: data.get('password')
         }
         console.log(loginPayload)
-
-        const instance = axios.create({
-            withCredentials: true
-        });
-
-        var config = {
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-            }
-        };
-
-        instance.post('https://backend.swe.works/sign-in', JSON.stringify(loginPayload), config)
-            .then(function (response) {
-                console.log(response)
-                console.log("login success")
-                localStorage.setItem("isAuth", true)
-                navigate("/admin-page")
-            })
-            .catch(function (error) {
-                alert("login failed")
-                console.log(JSON.stringify(loginPayload))
-                console.log(error);
-            });
-
+        await loginUser(loginPayload);
     };
 
     return (
