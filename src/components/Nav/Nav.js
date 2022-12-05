@@ -31,6 +31,8 @@ const mapPageToLink = {
     "Search": "/admin-page/search-page"
 }
 
+axios.defaults.withCredentials = true
+
 function Nav(props) {
     const navigate = useNavigate()
 

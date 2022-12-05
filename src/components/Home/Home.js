@@ -18,7 +18,6 @@ export const HOST = "https://backend.swe.works";
 
 export default function Home() {
     const [deptId, setDeptId] = React.useState(0);
-
     return (
         <div>
             <Nav deptId={deptId} setDeptId={setDeptId}/>
