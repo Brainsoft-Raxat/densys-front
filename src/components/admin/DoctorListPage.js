@@ -121,6 +121,14 @@ const DoctorListPage = (props) => {
     }
 
     const handleClose = () => {
+        setBooking({
+            doctor_id: -1,
+            iin: "",
+            phone: "",
+            email: "",
+            reg_date: dayjs().format("YYYY-MM-DD"),
+            reg_time: ""
+        })
         setOpen(false);
     };
 
@@ -158,7 +166,7 @@ const DoctorListPage = (props) => {
                         checkStatusCode(error, navigate)
                     })
             }
-    }, [props.deptId, currentPage, dept_id, params, countDoctors])
+    }, [props.deptId, currentPage, dept_id, params, countDoctors, open])
 
 
     return (

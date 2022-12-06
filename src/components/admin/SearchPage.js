@@ -82,7 +82,7 @@ const SearchPage = () => {
             .catch(function (error) {
                 checkStatusCode(error, navigate)
             });
-    }, [booking.reg_date, isBooked]);
+    }, [booking.reg_date, isBooked, open]);
 
 
     const handleBook = () => {
@@ -110,6 +110,14 @@ const SearchPage = () => {
     }
 
     const handleClose = () => {
+        setBooking({
+            doctor_id: -1,
+            iin: "",
+            phone: "",
+            email: "",
+            reg_date: dayjs().format("YYYY-MM-DD"),
+            reg_time: ""
+        })
         setOpen(false);
     };
 
