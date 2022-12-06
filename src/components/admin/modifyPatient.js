@@ -8,23 +8,23 @@ import dayjs from "dayjs";
 import axios from "axios";
 import {HOST} from "../Home/Home";
 import {checkStatusCode} from "../helpers/checkStatusCode";
-import {useSearchParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
 
 
 function ModifyPatient() {
     const [patient, setPatient] = React.useState();
-    const [searchParams, setSearchParams] = useSearchParams();
+    let {pid} = useParams();
+   
 
     React.useEffect(() => {
-        let id = searchParams.get("id")
 
-        axios.get(HOST + `/patients/${id}`)
+        axios.get(HOST + `/patients/${pid}`)
             .then(function (response) {
                 console.log(response.data.data)
                 setPatient(prevState => (
                     [
-                        ...response.data.data.doctors
+                        ...response.data.data.patient
                     ]
                 ))
             })
@@ -79,6 +79,7 @@ function ModifyPatient() {
                                 fullWidth
                                 variant="standard"
                                 onChange = {handleChange}
+                                defaultValue = {patient.firstName} 
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
@@ -198,7 +199,7 @@ function ModifyPatient() {
                                 variant = "contained" 
                                 sx = {{bgcolor: "#a0a0ad"}}
                                 onClick = {handleChange}>
-                                    Add Patient
+                                    Modify Patient
                             </Button>
                         </Grid>
                     </Grid>
