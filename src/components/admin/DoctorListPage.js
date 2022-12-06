@@ -42,6 +42,7 @@ const DoctorListPage = (props) => {
     const [currentPage, setCurrentPage] = React.useState(1);
     const [dept_id, setDeptId] = React.useState(1);
     const [params, setParams] = React.useState(useParams());
+    const [isBooked, setIsBooked] = React.useState(false);
     const [booking, setBooking] = React.useState({
         doctor_id: -1,
         iin: "",
@@ -83,6 +84,9 @@ const DoctorListPage = (props) => {
 
 
     useEffect(() => {
+        if (isBooked) {
+            setIsBooked(false)
+        }
         axios.get(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
             .then(function (response) {
                 if (response.status === 200) {
@@ -96,14 +100,15 @@ const DoctorListPage = (props) => {
             .catch(function (error) {
                 checkStatusCode(error, navigate)
             });
-    }, [booking.reg_date]);
+    }, [booking.reg_date, isBooked]);
 
     const handleBook = () => {
         console.log(booking);
 
         axios.post(HOST + `/doctors/appointments`, JSON.stringify(booking))
             .then(function (response) {
-                if (response.status === 200) {
+                if (response.status === 201) {
+                    setIsBooked(true);
                     alert("Appointment booked successfully")
                     setOpen(false);
                 } else {

@@ -30,6 +30,7 @@ const SearchPage = () => {
     const [numOfPages, setNumOfPages] = React.useState(0);
     const [currentPage, setCurrentPage] = React.useState(1);
     const [doctors, setDoctors] = useState([])
+    const [isBooked, setIsBooked] = useState(false);
     const navigate = useNavigate();
 
     const Transition = React.forwardRef(function Transition(props, ref) {
@@ -65,6 +66,9 @@ const SearchPage = () => {
 
 
     useEffect(() => {
+        if (isBooked) {
+            setIsBooked(false)
+        }
         axios.get(HOST + `/doctors/appointments?date=${booking.reg_date}&doctor_id=${booking.doctor_id}`)
             .then(function (response) {
                 if (response.status === 200) {
@@ -78,7 +82,7 @@ const SearchPage = () => {
             .catch(function (error) {
                 checkStatusCode(error, navigate)
             });
-    }, [booking.reg_date]);
+    }, [booking.reg_date, isBooked]);
 
 
     const handleBook = () => {
@@ -92,7 +96,8 @@ const SearchPage = () => {
 
         axios.post(HOST + `/doctors/appointments`, JSON.stringify(booking))
             .then(function (response) {
-                if (response.status === 200) {
+                if (response.status === 201) {
+                    setIsBooked(true)
                     alert("Appointment booked successfully")
                     setOpen(false);
                 } else {
@@ -156,7 +161,7 @@ const SearchPage = () => {
     };
 
     useEffect(() => {
-        axios.get(HOST + `/doctors/?search=${search_input}&page_num=${currentPage}&page_size=6`)
+        axios.get(HOST + `/doctors?search=${search_input}&page_num=${currentPage}&page_size=6`)
             .then(function (response) {
                 if (response.status === 200) {
                     setCountDoctors(response.data.data.count)
