@@ -17,6 +17,7 @@ import {
 import {setAuthToken} from "../helpers/setAuthToken";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {HOST} from "../Home/Home";
 
 function Copyright(props) {
     return (
@@ -35,7 +36,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 async function loginUser(credentials) {
-    return fetch('https://backend.swe.works/sign-in', {
+    return fetch(HOST + '/sign-in', {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -79,7 +80,7 @@ export default function Login() {
             }
         };
 
-        instance.post('https://backend.swe.works/sign-in', JSON.stringify(loginPayload), config)
+        instance.post(HOST + '/sign-in', JSON.stringify(loginPayload), config)
             .then(function (response) {
                 console.log(response)
                 if (response.status == 200){

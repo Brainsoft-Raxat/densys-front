@@ -12,8 +12,10 @@ import DoctorListPage from "../admin/DoctorListPage";
 import SearchPage from "../admin/SearchPage";
 import {Create} from "@mui/icons-material";
 import CreateDoctor from "../admin/createDoctor";
+import CreatePatient from "../admin/createPatient";
 
 export const HOST = "https://backend.swe.works";
+// export const HOST = "https://swe-backend.herokuapp.com";
 // export const HOST = "https://localhost:3000";
 
 export default function Home() {
@@ -34,7 +36,7 @@ export default function Home() {
                     />
                     <Route
                         path="patient-registration"
-                        element={<PatientRegistration/>}
+                        element={<CreatePatient/>}
                     />
                     <Route
                         path="doctor-modification"

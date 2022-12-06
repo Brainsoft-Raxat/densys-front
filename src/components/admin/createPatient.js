@@ -8,10 +8,12 @@ import dayjs from "dayjs";
 import axios from "axios";
 import {HOST} from "../Home/Home";
 import {checkStatusCode} from "../helpers/checkStatusCode";
+import {useNavigate} from "react-router-dom";
 
 
 
 function CreatePatient() {
+    const navigate = useNavigate()
     const [patient, setPatient] = React.useState({
         blood_type: 0,
         emer_contact: '',
